@@ -11,19 +11,21 @@
           Be the best employee or employer
         </div>
         <div v-show="$route.name.includes('signup')" class="actions come-down-sm">
-          <button v-show="section === 1" class="primary-btn uni-btn">
+          <nuxt-link v-show="section === 1" to="/school/signup" class="primary-btn uni-btn">
             University
-          </button>
-          <button v-show="section === 1" class="primary-btn employer-btn">
+          </nuxt-link>
+          <nuxt-link v-show="section === 1" to="/employer/signup" class="primary-btn employer-btn">
             Employer
-          </button>
+          </nuxt-link>
           <button v-show="section > 1" class="primary-btn uni-btn" @click="goBack">
             Go Back
           </button>
         </div>
       </div>
     </div>
-    <div class="bottom-bg bg-img school-login" />
+    <div v-show="$route.name.includes('login')" class="bottom-bg bg-img school-login fade-in" />
+    <div v-show="$route.name === 'school-signup'" class="bottom-bg bg-img school-signup fade-in" />
+    <div v-show="$route.name === 'employer-signup'" class="bottom-bg bg-img employer fade-in" />
     <div class="page-content">
       <Nuxt />
     </div>
@@ -61,7 +63,15 @@ export default {
   }
   .bottom-bg {
     height: calc(100vh - 355px);
+  }
+  .bottom-bg.school-login {
     background-image: url(~assets/images/school-login-bg.png);
+  }
+  .bottom-bg.school-signup {
+    background-image: url(~assets/images/school-signup-bg.png);
+  }
+  .bottom-bg.employer {
+    background-image: url(~assets/images/employer-bg.png);
   }
   .page-content {
     position: absolute;
@@ -94,12 +104,16 @@ export default {
     background: #FFFFFF;
     color: var(--primary);
     border: 1px solid #FFFFFF;
+    font-weight: 500;
+    font-size: 1rem;
   }
   .employer-btn {
     background: var(--primary);
     color: #FFFFFF;
     border: 1px solid #FFFFFF;
     margin-left: 12px;
+    font-weight: 500;
+    font-size: 1rem;
   }
 
   @media screen and (max-width: 1400px) {
