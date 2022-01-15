@@ -1,9 +1,13 @@
 <template>
-  <Tutorial />
+  <div class="section page">
+    <div class="inner">
+      This is home page
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'Home'
 }
 </script>
