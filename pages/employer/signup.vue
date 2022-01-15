@@ -26,13 +26,13 @@
         <div class="form-group">
           <input type="text">
           <label for="name">
-            University Name
+            Company Name
           </label>
         </div>
         <div class="form-group">
           <input type="text">
           <label for="website">
-            University Website
+            Company Website
           </label>
         </div>
       </section>
@@ -44,7 +44,7 @@
           </div>
           <input type="number">
           <label for="phone">
-            University Phone
+            Company Phone
           </label>
         </div>
         <div class="form-group">
@@ -72,7 +72,7 @@
             </option>
           </select>
           <label for="location">
-            University Location
+            Company Location
           </label>
           <ArrowDown class="icon" />
         </div>
@@ -82,10 +82,10 @@
         <div class="form-group">
           <label for="name" class="image">
             <input type="file" @input="logo = $event.target.files[0]">
-            University Logo
+            Company Logo
           </label>
           <label for="name">
-            University Logo
+            Company Logo
           </label>
         </div>
         <div v-if="logo !== null" class="img-preview bg-img" :style="`background-image: url(${getURL(logo)})`" />
@@ -93,13 +93,64 @@
         <div class="form-group">
           <label for="name" class="image">
             <input type="file" @input="icon = $event.target.files[0]">
-            University Icon
+            Company Icon
           </label>
           <label for="name">
-            University Icon
+            Company Icon
           </label>
         </div>
         <div v-if="icon !== null" class="icon-preview bg-img" :style="`background-image: url(${getURL(icon)})`" />
+      </section>
+      <section v-show="section === 4">
+        <div class="form-group">
+          <select id="sector" name="sector">
+            <option value="Finance">
+              Finance
+            </option>
+            <option value="Technology">
+              Technology
+            </option>
+            <option value="Marketing">
+              Marketing
+            </option>
+            <option value="Advertising &amp; Media">
+              Advertising &amp; Media
+            </option>
+          </select>
+          <label for="sector">
+            Company Sector
+          </label>
+          <ArrowDown class="icon" />
+        </div>
+        <div class="form-group">
+          <select id="size" name="size">
+            <option value="0 - 10">
+              0 - 10
+            </option>
+            <option value="10 - 20">
+              10 - 20
+            </option>
+            <option value="20 - 50">
+              20 - 50
+            </option>
+            <option value="50 - 300">
+              50 - 300
+            </option>
+            <option value="over 300">
+              300+
+            </option>
+          </select>
+          <label for="size">
+            Company Size (Employees)
+          </label>
+          <ArrowDown class="icon" />
+        </div>
+        <div class="form-group">
+          <textarea type="text" placeholder="My Company is a..." />
+          <label for="name">
+            About Company
+          </label>
+        </div>
       </section>
       <button class="primary-btn" @click="nextButtonAction">
         {{ signUpText }}
@@ -130,7 +181,7 @@ export default {
       section: state => state.auth.signupSection
     }),
     signUpText () {
-      if (this.section === 3) {
+      if (this.section === 4) {
         return 'SIGN UP'
       }
       return 'PROCEED'
@@ -138,7 +189,7 @@ export default {
   },
   methods: {
     nextButtonAction () {
-      if (this.section < 3) {
+      if (this.section < 4) {
         this.$store.commit('auth/setSignupSection', this.section + 1)
       }
     },
