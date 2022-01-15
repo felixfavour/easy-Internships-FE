@@ -11,11 +11,14 @@
           Be the best employee or employer
         </div>
         <div v-show="$route.name.includes('signup')" class="actions come-down-sm">
-          <button class="primary-btn uni-btn">
+          <button v-show="section === 1" class="primary-btn uni-btn">
             University
           </button>
-          <button class="primary-btn employer-btn">
+          <button v-show="section === 1" class="primary-btn employer-btn">
             Employer
+          </button>
+          <button v-show="section > 1" class="primary-btn uni-btn" @click="goBack">
+            Go Back
           </button>
         </div>
       </div>
@@ -28,9 +31,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'AuthLayout',
-  layout: 'noAuth'
+  layout: 'noAuth',
+  computed: {
+    ...mapState({
+      section: state => state.auth.signupSection
+    })
+  },
+  created () {
+    this.$nuxt.$on('signup-section', (data) => {
+      this.section = data
+    })
+  },
+  methods: {
+    goBack () {
+      this.$store.commit('auth/setSignupSection', this.section - 1)
+    }
+  }
 }
 </script>
 
@@ -81,5 +100,14 @@ export default {
     color: #FFFFFF;
     border: 1px solid #FFFFFF;
     margin-left: 12px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    .page-content {
+      top: 2rem;
+    }
+    .top-bg {
+      padding-top: 3rem;
+    }
   }
 </style>
