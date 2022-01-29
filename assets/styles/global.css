@@ -2,11 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --1920-width: 80%;
+  --1920-width: 85%;
   --1450-width: 85%;
   --1050-width: 90%;
   --800-width: 90%;
   --500-width: 95%;
+  --sidebar-width: 320px;
+  --header-height: 80px;
   --black: #000000;
   --white: #FFFFFF;
   --primary: #007BEC;
@@ -368,6 +370,7 @@ a.disabled {
   background: transparent;
   transition: 0.3s;
   font-size: 1rem;
+  z-index: 1;
   width: 100%;
   height: 55px;
   padding: 0 12px;

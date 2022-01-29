@@ -74,7 +74,7 @@
           <label for="location">
             Company Location
           </label>
-          <ArrowDown class="icon" />
+          <IconArrowDown class="icon" />
         </div>
       </section>
       <section v-show="section === 3">
@@ -120,7 +120,7 @@
           <label for="sector">
             Company Sector
           </label>
-          <ArrowDown class="icon" />
+          <IconArrowDown class="icon" />
         </div>
         <div class="form-group">
           <select id="size" name="size">
@@ -143,7 +143,7 @@
           <label for="size">
             Company Size (Employees)
           </label>
-          <ArrowDown class="icon" />
+          <IconArrowDown class="icon" />
         </div>
         <div class="form-group">
           <textarea type="text" placeholder="My Company is a..." />

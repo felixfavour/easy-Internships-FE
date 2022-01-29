@@ -74,7 +74,7 @@
           <label for="location">
             University Location
           </label>
-          <ArrowDown class="icon" />
+          <IconArrowDown class="icon" />
         </div>
       </section>
       <section v-show="section === 3">
