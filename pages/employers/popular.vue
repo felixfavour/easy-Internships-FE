@@ -9,7 +9,9 @@
     />
     <div class="section">
       <div class="inner">
-        Page Content
+        <div class="card-grid">
+          <EmployerCard v-for="index in 6" :key="index" />
+        </div>
       </div>
     </div>
   </div>
@@ -17,11 +19,15 @@
 
 <script>
 export default {
-  name: 'Employers',
+  name: 'PopularEmployers',
   layout: 'dashLayout'
 }
 </script>
 
 <style scoped>
-
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    column-gap: 1.8%;
+  }
 </style>

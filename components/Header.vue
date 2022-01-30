@@ -1,7 +1,13 @@
 <template>
   <div class="header-ctn section">
     <div class="inner">
-      <span class="header-title">Header Title</span>
+      <span class="header-title">{{ $route.name }}</span>
+      <div class="actions">
+        <!-- ACTION FOR POPULAR EMPLOYEES PAGE -->
+        <nuxt-link to="/employers/all" v-if="$route.name === 'employers-popular'" class="primary-btn come-down-sm">
+          See All Employers
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +19,12 @@ export default {
 </script>
 
 <style scoped>
+  .primary-btn {
+    width: 160px;
+    height: 40px;
+    background: var(--primary-dark);
+    border-radius: 32px;
+  }
   .header-ctn {
     background: #FFFFFF;
     display: flex;
@@ -22,6 +34,11 @@ export default {
     height: var(--header-height);
     width: 100%;
     padding-top: 0;
+  }
+  .header-ctn > .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .header-title {
     font-size: 1.1rem;

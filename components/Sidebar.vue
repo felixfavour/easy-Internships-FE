@@ -8,7 +8,7 @@
     </div>
     <ul class="actions">
       <li>
-        <nuxt-link to="/employers" :class="{ 'active': $route.name.includes('employers') }">
+        <nuxt-link to="/employers/popular" :class="{ 'active': $route.name.includes('employers') }">
           <IconEmployers />
           <span>Employers</span>
         </nuxt-link>
