@@ -4,7 +4,7 @@
       <span class="header-title">{{ $route.name }}</span>
       <div class="actions">
         <!-- ACTION FOR POPULAR EMPLOYEES PAGE -->
-        <nuxt-link v-if="$route.name === 'employers-popular'" to="/employers/all" class="primary-btn come-down-sm">
+        <nuxt-link v-if="$route.name === 'employer-popular'" to="/employer/all" class="primary-btn come-down-sm">
           See All Employers
         </nuxt-link>
       </div>

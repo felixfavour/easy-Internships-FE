@@ -83,6 +83,6 @@ export default {
   @keyframes contract-dropdown {
     0% { height: 100px; overflow: hidden; }
     99% {overflow: hidden;}
-    100% { height: 0px; overflow: hidden; }
+    100% { height: 0px; overflow: hidden; box-shadow: none;}
   }
 </style>

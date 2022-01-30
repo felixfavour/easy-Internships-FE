@@ -39,9 +39,9 @@
       <button class="primary-btn outlined">
         I'm Interested
       </button>
-      <button class="primary-btn">
+      <nuxt-link class="primary-btn" to="/employer/id/about">
         See More
-      </button>
+      </nuxt-link>
     </div>
   </div>
 </template>
