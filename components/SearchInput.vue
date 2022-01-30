@@ -37,6 +37,9 @@ export default {
     border-radius: 10px;
     width: 400px;
   }
+  .search-input.outlined input {
+    border: 1px solid rgba(193, 206, 200, 0.63);
+  }
   .search-input svg {
     position: absolute;
     left: 16px;

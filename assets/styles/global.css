@@ -122,6 +122,20 @@ button:active {
   outline: none;
   height: 2.5rem;
   font-size: 0.875rem;
+  transition: 0.3s;
+  padding: 0 8px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+.clear-btn:hover, .clear-btn.active {
+  background: var(--primary-light);
 }
 .secondary-btn.clear {
   background: transparent;
