@@ -75,7 +75,7 @@ export default {
     margin-right: 8px;
   }
   .ei-logo {
-    background-image: url('~assets/images/ei-logo.png');
+    background-image: url('~assets/images/Ei-logo.png');
     margin-left: 8px;
   }
   .large-text {

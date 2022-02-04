@@ -175,7 +175,7 @@ export default {
     width: 50px;
     height: 50px;
     border-radius: 8px;
-    background-image: url('~assets/images/ei-logo.png');
+    background-image: url('~assets/images/Ei-logo.png');
   }
   .large-text {
     padding-top: 40px;
