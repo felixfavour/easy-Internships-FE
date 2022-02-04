@@ -73,13 +73,13 @@ export default {
     height: calc(100vh - 355px);
   }
   .bottom-bg.school-login {
-    background-image: url(~assets/images/school-login-bg.png);
+    background-image: url('~assets/images/school-login-bg.png');
   }
   .bottom-bg.school-signup {
-    background-image: url(~assets/images/school-signup-bg.png);
+    background-image: url('~assets/images/school-signup-bg.png');
   }
   .bottom-bg.employer {
-    background-image: url(~assets/images/employer-bg.png);
+    background-image: url('~assets/images/employer-bg.png');
   }
   .page-content {
     position: absolute;

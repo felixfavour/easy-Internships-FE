@@ -226,7 +226,7 @@ export default {
     width: 50px;
     height: 50px;
     border-radius: 8px;
-    background-image: url(~assets/images/ei-logo.png);
+    background-image: url('~assets/images/ei-logo.png');
   }
   .large-text {
     padding-top: 40px;
@@ -279,7 +279,7 @@ export default {
     margin-top: 12px;
     width: 80px;
     height: 80px;
-    background-image: url(~assets/images/school-full-logo.png);
+    background-image: url('~assets/images/school-full-logo.png');
   }
 
   /* FORM GROUP */

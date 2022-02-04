@@ -83,7 +83,7 @@ export default {
     color: var(--primary-dark);
   }
   .logo {
-    background-image: url(~assets/images/sample-employer.png);
+    background-image: url('~assets/images/sample-employer.png');
     margin-right: 12px;
     width: 40px;
     height: 40px;

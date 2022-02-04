@@ -71,11 +71,11 @@ export default {
     border-radius: 8px;
   }
   .uni-logo {
-    background-image: url(~assets/images/sample-school.png);
+    background-image: url('~assets/images/sample-school.png');
     margin-right: 8px;
   }
   .ei-logo {
-    background-image: url(~assets/images/ei-logo.png);
+    background-image: url('~assets/images/ei-logo.png');
     margin-left: 8px;
   }
   .large-text {
