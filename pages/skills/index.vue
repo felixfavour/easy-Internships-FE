@@ -21,7 +21,7 @@
           <div class="text">
             Have a skill that is missing below?
           </div>
-          <button class="primary-btn">
+          <button class="primary-btn" @click="newSkillModal = true">
             + CREATE NEW SKILL
           </button>
         </div>
@@ -40,13 +40,19 @@
         </div>
       </div>
     </div>
+    <ModalNewSkill v-if="newSkillModal" @close-modal="newSkillModal = false" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'Skills',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  data () {
+    return {
+      newSkillModal: false
+    }
+  }
 }
 </script>
 

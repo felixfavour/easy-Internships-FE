@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="action">
-        <button class="primary-btn">
+        <button class="primary-btn" @click="addSkillDialog = true">
           + ADD SKILL
         </button>
         <!-- <button class="primary-btn danger">
@@ -27,6 +27,10 @@
         </button> -->
       </div>
     </div>
+    <DialogAddSkill
+      v-if="addSkillDialog"
+      @close-modal="addSkillDialog = false"
+    />
   </div>
 </template>
 
@@ -34,6 +38,11 @@
 export default {
   name: 'SkillCard',
   props: {
+  },
+  data () {
+    return {
+      addSkillDialog: false
+    }
   }
 }
 </script>
