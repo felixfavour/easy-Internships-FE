@@ -9,7 +9,9 @@
     />
     <div class="page section">
       <div class="inner">
-        Performance
+        <div class="card-grid">
+          <InterestCard v-for="index in 5" :key="index" />
+        </div>
       </div>
     </div>
   </div>
@@ -23,5 +25,9 @@ export default {
 </script>
 
 <style scoped>
-
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    column-gap: 1.8%;
+  }
 </style>
