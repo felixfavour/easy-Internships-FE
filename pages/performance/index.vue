@@ -9,7 +9,12 @@
     />
     <div class="page section">
       <div class="inner">
-        Performance
+        <div class="card-grid briefs">
+          <PerformanceBriefCard :performance="{ label: 'Total Visits', value:'173' }" />
+          <PerformanceBriefCard :performance="{ label: 'Unique Visits', value:'47' }" />
+          <PerformanceBriefCard :performance="{ label: 'Academic Score', value:'85%' }" />
+          <PerformanceBriefCard :performance="{ label: 'Skills Score', value:'93%' }" />
+        </div>
       </div>
     </div>
   </div>
@@ -23,5 +28,9 @@ export default {
 </script>
 
 <style scoped>
-
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 24.5%);
+    column-gap: 1.5%;
+  }
 </style>
