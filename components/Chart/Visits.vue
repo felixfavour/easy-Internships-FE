@@ -83,7 +83,5 @@ export default {
 
   /* MEDIA QUERIES */
   @media screen and (max-width: 600px) {
-    canvas {
-    }
   }
 </style>
