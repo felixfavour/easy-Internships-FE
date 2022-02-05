@@ -580,6 +580,7 @@ a.disabled {
 /* Sections */
 .page {
   position: relative;
+  padding-bottom: 1rem;
 }
 .section {
   display: flex;
