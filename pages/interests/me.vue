@@ -1,5 +1,5 @@
 <template>
-  <div class="interests-section">
+  <div class="interests-section page">
     <PageBanner
       :data="{
         sub: 'See employers on your radar',

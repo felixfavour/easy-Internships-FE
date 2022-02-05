@@ -1,5 +1,5 @@
 <template>
-  <div class="employers-ctn">
+  <div class="employers-ctn page">
     <PageBanner
       :data="{
         sub: 'Random selection based on popular opinion',

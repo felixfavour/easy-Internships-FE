@@ -1,5 +1,5 @@
 <template>
-  <div class="performance-section">
+  <div class="skills-section page">
     <PageBanner
       :data="{
         sub: 'What makes you unique, prove your worth',

@@ -1,5 +1,5 @@
 <template>
-  <div class="employers-ctn section">
+  <div class="employers-ctn section page">
     <div class="inner">
       <div class="employers-header">
         <SearchInput class="outlined" />
