@@ -1,12 +1,12 @@
 <template>
   <div class="page">
-    Profile
+    Profile Edit
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Profile',
+  name: 'ProfileEdit',
   layout: 'dashLayout'
 }
 </script>

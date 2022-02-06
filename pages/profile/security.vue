@@ -1,12 +1,12 @@
 <template>
   <div class="page">
-    Profile
+    Profile Security
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Profile',
+  name: 'ProfileSecurity',
   layout: 'dashLayout'
 }
 </script>

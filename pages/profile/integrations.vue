@@ -1,12 +1,12 @@
 <template>
   <div class="page">
-    Profile
+    Profile Integrations
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Profile',
+  name: 'ProfileIntegrations',
   layout: 'dashLayout'
 }
 </script>

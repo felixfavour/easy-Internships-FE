@@ -32,7 +32,7 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/profile" :class="{ 'active': $route.name.includes('profile') }">
+        <nuxt-link to="/profile/overview" :class="{ 'active': $route.name.includes('profile') }">
           <IconProfile />
           <span>My Profile</span>
         </nuxt-link>
