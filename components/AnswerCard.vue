@@ -1,6 +1,6 @@
 <template>
-  <div class="question-card">
-    <div class="votes">
+  <div :class="['question-card', original ? 'bordered' : '']">
+    <div v-if="!original" class="votes">
       <button class="clear-btn">
         <IconUpvote :filled="true" />
         <!-- <IconUpvote /> -->
@@ -20,29 +20,27 @@
             Their lovely work culture
           </div>
           <div class="text-sub">
-            asked on 26 Aug, 2021
+            <IconPersonCheck v-if="original" class="icon" />
+            answered on 26 Aug, 2021
           </div>
         </div>
       </div>
       <p class="row row-2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor adipisci vel iusto iure beatae nemo, quasi perspiciatis neque? Aliquid repudiandae minima possimus culpa aut, expedita, voluptate laudantium sed quas, mollitia hic saepe maxime tenetur libero eveniet eum voluptatem. Laudantium cupiditate beatae accusamus aliquam et, fuga fugiat alias eos ipsam nulla.
       </p>
-      <div class="row row-3">
-        <nuxt-link to="/employer/id/question#answer" class="primary-btn">
-          Add Answer
-        </nuxt-link>
-        <nuxt-link v-if="!$route.name.includes('question_id')" to="/employer/id/question" class="primary-btn outlined">
-          See 25 Answers
-          <IconArrowRight class="icon" />
-        </nuxt-link>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'QuestionCard'
+  name: 'AnswerCard',
+  props: {
+    original: {
+      type: Boolean,
+      default: () => false
+    }
+  }
 }
 </script>
 
@@ -52,6 +50,9 @@ export default {
     min-width: 45px;
     display: grid;
     place-items: center;
+  }
+  .bordered {
+    border: 1px solid #007BEC;
   }
   .question-card {
     padding: 28px;
@@ -84,6 +85,11 @@ export default {
     color: #00000070;
     font-size: 0.85rem;
     margin-top: 3px;
+    display: flex;
+    align-items: center;
+  }
+  .text-sub > .icon {
+    margin-right: 6px;
   }
   .rating {
     font-weight: 900;

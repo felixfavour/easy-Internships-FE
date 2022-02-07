@@ -69,8 +69,4 @@ export default {
     font-weight: 600;
     margin-bottom: 1rem;
   }
-  .salaries-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 49%);
-  }
 </style>
