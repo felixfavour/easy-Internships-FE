@@ -2,7 +2,17 @@
   <div class="employer-details">
     <div class="section">
       <div class="inner">
-        Employer Reviews
+        <section>
+          <div class="header">
+            Reviews
+          </div>
+          <div class="reviews-list">
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -16,5 +26,13 @@ export default {
 </script>
 
 <style scoped>
-
+  section {
+    margin-bottom: 5%;
+    max-width: 1100px;
+  }
+  .header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
 </style>

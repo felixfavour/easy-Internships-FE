@@ -44,6 +44,7 @@ export default {
 <style scoped>
   section {
     margin-bottom: 5%;
+    max-width: 1100px;
   }
   .header {
     font-size: 1.2rem;
