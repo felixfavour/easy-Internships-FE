@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <NuxtChild />
+    <NuxtChild class="page" />
   </div>
 </template>
 
@@ -55,5 +55,8 @@ export default {
     background: #FFFFFF;
     background: var(--primary-light);
     color: var(--primary-dark);
+  }
+  .page {
+    max-width: 1100px;
   }
 </style>
