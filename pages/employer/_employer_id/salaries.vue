@@ -38,5 +38,6 @@ export default {
   .salaries-grid {
     display: grid;
     grid-template-columns: repeat(2, 49%);
+    column-gap: 2%;
   }
 </style>

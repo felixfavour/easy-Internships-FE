@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'ReviewCard'
+  name: 'QuestionCard'
 }
 </script>
 
