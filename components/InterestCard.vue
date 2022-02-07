@@ -6,7 +6,7 @@
         <div class="name">
           Google Inc.
         </div>
-        <StarRating rating="3.5" />
+        <IconStarRating rating="3.5" />
       </div>
     </div>
     <div class="row row-3 actions">

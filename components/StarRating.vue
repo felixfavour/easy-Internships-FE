@@ -1,8 +1,8 @@
 <template>
   <div class="star-rating">
-    <Star v-for="index in approxRating" :key="`filled-${index}`" />
-    <Star v-for="index in 5 - approxRating" :key="`outlined-${index}`" :outlined="true" />
-    <span>
+    <IconStar v-for="index in approxRating" :key="`filled-${index}`" />
+    <IconStar v-for="index in 5 - approxRating" :key="`outlined-${index}`" :outlined="true" />
+    <span v-if="brackets">
       ({{ rating }})
     </span>
   </div>
@@ -15,6 +15,10 @@ export default {
     rating: {
       type: String,
       default: () => ''
+    },
+    brackets: {
+      type: Boolean,
+      default: () => true
     }
   },
   computed: {
