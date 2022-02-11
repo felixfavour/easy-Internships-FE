@@ -13,7 +13,7 @@
         <h2 class="count">
           4.0
         </h2>
-        <StarRating rating="4.0" :brackets="false" />
+        <IconStarRating rating="4.0" :brackets="false" />
       </div>
     </div>
     <p class="row row-2">

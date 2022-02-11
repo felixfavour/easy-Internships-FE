@@ -36,7 +36,12 @@
 <script>
 export default {
   name: 'EmployerDetails',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  data () {
+    return {
+      question: ''
+    }
+  }
 }
 </script>
 

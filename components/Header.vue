@@ -38,7 +38,7 @@ export default {
     width: calc(100% - var(--sidebar-width));
     padding-top: 0;
     position: fixed;
-    z-index: 5;
+    z-index: 1;
   }
   .header-ctn .inner {
     display: flex;
@@ -47,7 +47,8 @@ export default {
   }
   .header-title {
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: capitalize;
   }
   .actions {
     display: flex;
