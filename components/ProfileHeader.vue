@@ -19,7 +19,10 @@
           </div>
         </div>
         <div class="actions">
-          <nuxt-link to="/profile/edit" class="primary-btn">
+          <nuxt-link v-if="$route.name === 'profile-edit'" to="/profile/edit" class="primary-btn green-bg">
+            <IconCheck class="icon" /> SAVE CHANGES
+          </nuxt-link>
+          <nuxt-link v-else to="/profile/edit" class="primary-btn">
             <IconEdit class="icon" /> EDIT PROFILE
           </nuxt-link>
         </div>
@@ -52,6 +55,9 @@ export default {
 </script>
 
 <style scoped>
+  .green-bg {
+    background: #06E402;
+  }
   .auto-wh {
     width: auto;
     height: auto;
