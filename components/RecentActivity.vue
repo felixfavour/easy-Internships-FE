@@ -25,6 +25,7 @@ export default {
     box-shadow: 0px 14px 48px -14px rgba(0, 123, 236, 0.4);
     border-radius: 24px;
     padding: 10%;
+    margin-bottom: 15%;
   }
   .clear-btn {
     height: auto;

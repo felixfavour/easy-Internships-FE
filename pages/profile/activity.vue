@@ -1,6 +1,10 @@
 <template>
   <div class="page">
-    Profile Activity
+    <section>
+      <div class="recent-activity">
+        <ActivityLarge v-for="index in 10" :key="index" />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -12,5 +16,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .recent-activity {
+    border-radius: 24px;
+    margin-bottom: 15%;
+  }
 </style>

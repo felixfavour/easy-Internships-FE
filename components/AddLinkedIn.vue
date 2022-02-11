@@ -27,7 +27,6 @@ export default {
 
 <style scoped>
   .add-linkedin {
-    margin-top: 15%;
     background: rgba(0, 123, 236, 0.15);
     border-radius: 24px;
     padding: 10%;

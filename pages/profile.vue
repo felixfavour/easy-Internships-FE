@@ -7,7 +7,7 @@
         <NuxtChild />
       </div>
       <div class="col-2">
-        <RecentActivity />
+        <RecentActivity v-if="$route.name !== 'profile-activity'" />
         <AddLinkedIn />
       </div>
     </div>
