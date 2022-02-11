@@ -1,11 +1,14 @@
 <template>
   <div class="header-ctn section">
     <div class="inner">
-      <span class="header-title">{{ $route.name }}</span>
+      <HeaderContent class="header-title" />
       <div class="actions">
         <!-- ACTION FOR POPULAR EMPLOYEES PAGE -->
         <nuxt-link v-if="$route.name === 'employer-popular'" to="/employer/all" class="primary-btn come-down-sm">
           See All Employers
+        </nuxt-link>
+        <nuxt-link to="/profile/overview" class="profile">
+          <img src="~assets/images/man.png" alt="">
         </nuxt-link>
       </div>
     </div>
@@ -27,15 +30,17 @@ export default {
   }
   .header-ctn {
     background: #FFFFFF;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     box-shadow: 0px -9px 50px rgba(0, 0, 0, 0.25);
     height: var(--header-height);
-    width: 100%;
+    width: calc(100% - var(--sidebar-width));
     padding-top: 0;
+    position: fixed;
+    z-index: 5;
   }
-  .header-ctn > .inner {
+  .header-ctn .inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,5 +48,15 @@ export default {
   .header-title {
     font-size: 1.1rem;
     font-weight: 500;
+  }
+  .actions {
+    display: flex;
+  }
+  a > img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 1rem;
+    border: 3px solid #007BEC;
   }
 </style>

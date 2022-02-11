@@ -3,7 +3,7 @@
     <Sidebar />
     <div class="main-content">
       <Header />
-      <Nuxt />
+      <Nuxt class="main-page-content" />
     </div>
   </div>
 </template>
@@ -19,6 +19,10 @@ export default {
     display: flex;
   }
   .main-content {
-    width: 100%;
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+  }
+  .main-page-content {
+    margin-top: var(--header-height);
   }
 </style>

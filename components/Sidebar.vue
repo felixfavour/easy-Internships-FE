@@ -38,6 +38,14 @@
         </nuxt-link>
       </li>
     </ul>
+    <ul class="actions logout">
+      <li>
+        <button>
+          <IconLogOut />
+          <span>Log out</span>
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -53,6 +61,7 @@ export default {
     width: var(--sidebar-width);
     min-height: 100vh;
     color: #FFFFFF;
+    position: fixed;
   }
   .sidebar-header {
     height: var(--header-height);
@@ -69,7 +78,7 @@ export default {
     margin-left: 12px;
     font-size: 1.3rem;
   }
-  .actions a {
+  .actions a, .actions button {
     display: flex;
     align-items: center;
     padding: 0 24px;
@@ -84,5 +93,22 @@ export default {
   a > span {
     margin-left: 12px;
     margin-top: 6px;
+  }
+  .logout {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 16px;
+  }
+  .logout button {
+    width: 100%;
+    background: transparent;
+    color: #F00000;
+  }
+  .logout button:hover {
+    background: #f0000065;
+  }
+  .logout button span {
+    margin-left: 12px;
   }
 </style>
