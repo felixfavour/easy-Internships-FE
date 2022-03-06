@@ -12,27 +12,27 @@
     <form @submit.prevent="">
       <section v-show="section === 1">
         <div class="form-group">
-          <input type="email">
+          <input v-model="email" type="email">
           <label for="email">
             Administrator Email
           </label>
         </div>
         <div class="form-group">
-          <input type="password">
+          <input v-model="password" type="password">
           <label for="password">
             Password
           </label>
         </div>
         <div class="form-group">
-          <input type="text">
+          <input v-model="fullName" type="text">
           <label for="name">
             University Name
           </label>
         </div>
         <div class="form-group">
-          <input type="text">
-          <label for="website">
-            University Website
+          <input v-model="username" type="text">
+          <label for="username">
+            University username
           </label>
         </div>
       </section>
@@ -42,13 +42,19 @@
             <img src="~assets/images/uae-flag.png" alt="">
             <span>+971</span>
           </div>
-          <input type="number">
+          <input v-model="phone" type="number">
           <label for="phone">
             University Phone
           </label>
         </div>
         <div class="form-group">
-          <select id="location" name="location">
+          <input v-model="website" type="text">
+          <label for="website">
+            University Website
+          </label>
+        </div>
+        <div class="form-group">
+          <select id="location" v-model="location" name="location">
             <option value="Abu Dhabi">
               Abu Dhabi
             </option>
@@ -81,28 +87,30 @@
         <!-- LOGO UPLOAD -->
         <div class="form-group">
           <label for="name" class="image">
-            <input type="file" @input="logo = $event.target.files[0]">
+            <input type="file" @input="logo = $event.target.files[0]; uploadImage($event.target.files[0], 'logo')">
             University Logo
           </label>
           <label for="name">
             University Logo
           </label>
         </div>
-        <div v-if="logo !== null" class="img-preview bg-img" :style="`background-image: url(${getURL(logo)})`" />
+        <Loader v-if="$store.state.loading && loading === 'logo'" class="mr-6" />
+        <div v-else-if="logo !== null && !$store.state.loading" class="img-preview bg-img" :style="`background-image: url(${getURL(logo)})`" />
         <!-- ICON UPLOAD -->
         <div class="form-group">
           <label for="name" class="image">
-            <input type="file" @input="icon = $event.target.files[0]">
+            <input type="file" @input="icon = $event.target.files[0]; uploadImage($event.target.files[0], 'icon')">
             University Icon
           </label>
           <label for="name">
             University Icon
           </label>
         </div>
-        <div v-if="icon !== null" class="icon-preview bg-img" :style="`background-image: url(${getURL(icon)})`" />
+        <Loader v-if="$store.state.loading && loading === 'icon'" class="mr-6" />
+        <div v-else-if="icon !== null && !$store.state.loading" class="icon-preview bg-img" :style="`background-image: url(${getURL(icon)})`" />
       </section>
       <button class="primary-btn" @click="nextButtonAction">
-        {{ signUpText }}
+        <Loader v-if="$store.state.loading && loading === 'signup'" class="mr-6" />{{ signUpText }}
       </button>
       <div class="login-text">
         <span>Already have an account?</span>
@@ -121,8 +129,21 @@ export default {
   layout: 'authLayout',
   data () {
     return {
+      fullName: '',
+      email: '',
+      username: '',
+      password: '',
+      phone: '',
+      location: 'Dubai',
+      website: '',
+      tagline: '',
+      avatar: '',
+      bio: '',
       logo: null,
-      icon: null
+      logoUrl: '',
+      icon: null,
+      iconUrl: '',
+      loading: ''
     }
   },
   computed: {
@@ -140,12 +161,42 @@ export default {
     nextButtonAction () {
       if (this.section < 3) {
         this.$store.commit('auth/setSignupSection', this.section + 1)
+      } else {
+        this.signUpAction()
       }
     },
     getURL (file) {
       return URL.createObjectURL(file)
     },
-    signUpAction () {}
+    async uploadImage (file, type) {
+      const fd = new FormData()
+      fd.append('file', file)
+      this.loading = type
+      const result = await this.$axios.post('/file', fd)
+      if (type === 'icon') {
+        this.iconUrl = result.data.data.Location
+      } else {
+        this.logoUrl = result.data.data.Location
+      }
+    },
+    async signUpAction () {
+      this.loading = 'signup'
+      await this.$axios.post('/auth/signup', {
+        full_name: this.fullName,
+        email: this.email,
+        username: this.username,
+        password: this.password,
+        type: 'school',
+        phone: this.phone,
+        location: this.location,
+        website: this.website,
+        tagline: this.tagline,
+        avatar: this.logoUrl,
+        icon: this.iconUrl,
+        bio: this.bio
+      })
+      this.$toasted.success('You have successfully signed up, Now Sign in.')
+    }
   }
 }
 </script>

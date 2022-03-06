@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Toasted from 'vue-toasted'
 
 const options = {
-  duration: 5000,
+  duration: 10000,
   keepOnHover: true,
   action: {
     text: 'Cancel',

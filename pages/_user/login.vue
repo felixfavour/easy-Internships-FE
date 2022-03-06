@@ -1,31 +1,32 @@
 <template>
-  <div class="login-ctn">
+  <LargeLoader v-if="$store.state.loading && user === undefined" />
+  <div v-else-if="user !== undefined" class="login-ctn">
     <div class="header">
       <div class="logos">
-        <div class="uni-logo bg-img reveals" />
+        <div class="uni-logo bg-img reveals" :style="`background-image: url(${user.icon})`" />
         +
         <div class="ei-logo bg-img reveals" />
       </div>
       <div class="large-text">
         <LargeLogo />
-        <div>for Middlesex University</div>
+        <div>for {{ user.full_name }}</div>
       </div>
     </div>
     <form @submit.prevent="">
       <div class="form-group">
-        <input type="email">
+        <input v-model="email" type="email">
         <label for="email">
           University Email
         </label>
       </div>
       <div class="form-group">
-        <input type="password">
+        <input v-model="password" type="password">
         <label for="password">
           Password
         </label>
       </div>
-      <button class="primary-btn">
-        SIGN IN
+      <button :disabled="!(email.length > 4 && password.length > 4)" class="primary-btn" @click="login">
+        <Loader v-if="$store.state.loading" class="mr-6" />SIGN IN
       </button>
       <div class="signup-text">
         <span>Don't have an account?</span>
@@ -40,7 +41,33 @@
 <script>
 export default {
   name: 'LoginPage',
-  layout: 'authLayout'
+  layout: 'authLayout',
+  data () {
+    return {
+      user: undefined,
+      email: '',
+      password: ''
+    }
+  },
+  created () {
+    this.findUserByUsername()
+  },
+  methods: {
+    async findUserByUsername () {
+      const user = await this.$axios.get(`/user/username/${this.$route.params.user}`)
+      this.user = user.data.data
+    },
+    async login () {
+      const res = await this.$axios.post('/auth/login', {
+        email: this.email,
+        password: this.password,
+        school_id: this.user.school._id
+      })
+      this.$toasted.success('Login successful')
+      this.$store.commit('auth/setToken', res.data.data.token)
+      this.$router.push('/employer/popular')
+    }
+  }
 }
 </script>
 
@@ -71,7 +98,8 @@ export default {
     border-radius: 8px;
   }
   .uni-logo {
-    background-image: url('~assets/images/sample-school.png');
+    /* background-image: url('~assets/images/sample-school.png'); */
+    background-color: #FFFFFF;
     margin-right: 8px;
   }
   .ei-logo {

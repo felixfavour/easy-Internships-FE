@@ -276,9 +276,53 @@ a.disabled {
   display: grid;
   place-items: center;
 }
+
 .entire-screen-spinner > .loader {
   width: 100px;
   height: 100px;
+}
+
+.bar.error {
+  background: red;
+}
+
+.bar.success {
+  background: green;
+}
+
+.bar {
+  position: absolute;
+  inset: 0;
+  height: 35px;
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  z-index: 21;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  transform-origin: top;
+  animation: squeeze-out 0.5s forwards ease-in-out;
+}
+
+.bar > span {
+  color: inherit;
+}
+
+.bar > .icon {
+  color: inherit;
+  font-size: 1.2rem;
+}
+
+.bar > .clear-btn {
+  color: inherit;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.bar > .clear-btn:active {
+  background: transparent;
 }
 
 .error-bar {
@@ -433,6 +477,7 @@ a.disabled {
   width: 100%;
   padding: 16px 24px;
   position: relative;
+  cursor: pointer;
 }
 .form-group label.image .icon {
   margin-left: 8px;
@@ -714,6 +759,15 @@ a.disabled {
   }
   100% {
     background-position:  50% 0%;
+  }
+}
+
+@keyframes squeeze-out {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
   }
 }
 

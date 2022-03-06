@@ -1,6 +1,7 @@
 export const state = () => ({
   loading: false,
-  error: null
+  error: null,
+  success: null
 })
 
 export const mutations = ({
@@ -18,7 +19,7 @@ export const actions = {
     commit('setError', payload)
     window.setTimeout(() => {
       commit('setError', null)
-    }, 5000)
+    }, 10000)
   },
   loadingDispatch ({ commit }, payload) {
     commit('setLoading', payload)

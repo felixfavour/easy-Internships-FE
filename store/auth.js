@@ -6,5 +6,8 @@ export const state = () => ({
 export const mutations = ({
   setSignupSection (state, value) {
     state.signupSection = value
+  },
+  setToken (state, value) {
+    state.token = value
   }
 })
