@@ -1,5 +1,6 @@
 export const state = () => ({
-  signupSection: 1
+  signupSection: 1,
+  token: undefined
 })
 
 export const mutations = ({
