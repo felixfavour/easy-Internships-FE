@@ -10,21 +10,25 @@
       <form @submit.prevent="">
         <div class="form-group">
           <label for="image" class="input-image">
-            <div class="message">
-              <IconCamera />
-              <div>Click to add picture</div>
+            <div v-if="$store.state.loading && loading === 'image'" class="message">
+              <Loader />
             </div>
-            <input type="file" name="">
+            <div v-else class="message">
+              <IconCamera />
+              <div v-if="image">{{ image.name }}</div>
+              <div v-else>Click to add picture</div>
+            </div>
+            <input type="file" name="" @input="image = $event.target.files[0]; uploadImage($event.target.files[0])">
           </label>
         </div>
         <div class="form-group">
-          <input type="email">
-          <label for="email">
+          <input v-model="name" type="name">
+          <label for="name">
             Skill Name
           </label>
         </div>
-        <button class="primary-btn dark">
-          CREATE SKILL
+        <button class="primary-btn dark" @click="createSkill">
+          <Loader v-if="$store.state.loading && loading === 'signup'" class="mr-6" /> CREATE SKILL
         </button>
       </form>
     </div>
@@ -33,7 +37,34 @@
 
 <script>
 export default {
-  name: 'NewSkill'
+  name: 'NewSkill',
+  data () {
+    return {
+      image: null,
+      name: '',
+      imageUrl: '',
+      loading: ''
+    }
+  },
+  methods: {
+    async uploadImage (file) {
+      const fd = new FormData()
+      fd.append('file', file)
+      this.loading = 'image'
+      const result = await this.$axios.post('/file', fd)
+      this.imageUrl = result.data.data.Location
+    },
+    async createSkill () {
+      this.loading = 'signup'
+      await this.$axios.post('/skill', {
+        user_id: this.$store.state.auth.user._id,
+        name: this.name,
+        popular: false,
+        image: this.imageUrl
+      })
+      this.$emit('close-modal')
+    }
+  }
 }
 </script>
 

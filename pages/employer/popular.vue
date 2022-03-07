@@ -5,7 +5,7 @@
         sub: 'Random selection based on popular opinion',
         head: 'Popular Companies',
         bgName: 'bg1',
-        hasSearch: true }"
+        hasSearch: false }"
     />
     <div class="section">
       <div class="inner">

@@ -9,16 +9,21 @@
     />
     <div class="page section">
       <div class="inner">
-        <div class="my-skills">
+        <LargeLoader v-if="$store.state.loading" />
+        <div v-else-if="mySkills.length > 0 && !$store.state.loading" class="my-skills">
           <div class="card-grid">
-            <SkillCard v-for="index in 3" :key="index" />
+            <SkillCard v-for="skill in mySkills" :key="skill._id" :skill="skill.skills[0]" :my-skill="skill._id" />
           </div>
-          <button class="clear-btn">
+          <button v-if="mySkills.length > 3" class="clear-btn">
             View More
           </button>
         </div>
+        <EmptyState v-else text="You have added no skills." />
         <div class="new-skill-card">
-          <div class="text">
+          <div v-if="mySkills.length === 0" class="text">
+            Start by adding one of your skills.
+          </div>
+          <div v-else class="text">
             Have a skill that is missing below?
           </div>
           <button class="primary-btn" @click="newSkillModal = true">
@@ -34,8 +39,9 @@
               View More
             </button>
           </div>
+          <LargeLoader v-if="$store.state.loading" />
           <div class="card-grid">
-            <SkillCard v-for="index in 3" :key="index" />
+            <SkillCard v-for="skill in skills" :key="skill._id" :skill="skill" />
           </div>
         </div>
       </div>
@@ -50,7 +56,26 @@ export default {
   layout: 'dashLayout',
   data () {
     return {
-      newSkillModal: false
+      newSkillModal: false,
+      skills: [],
+      mySkills: [],
+      loading: ''
+    }
+  },
+  created () {
+    this.getMySkills()
+    this.getAllSkills()
+  },
+  methods: {
+    async getAllSkills () {
+      this.loading = 'all-skills'
+      const skills = await this.$axios.get('/skill')
+      this.skills = skills.data.data
+    },
+    async getMySkills () {
+      this.loading = 'my-skills'
+      const skills = await this.$axios.get(`/skill/user/${this.$store.state.auth.user._id}`)
+      this.mySkills = skills.data.data
     }
   }
 }

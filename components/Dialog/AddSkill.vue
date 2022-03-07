@@ -6,13 +6,14 @@
       </div>
       <form @submit.prevent="">
         <div class="form-group">
-          <textarea placeholder="Special information about you with this skill, tools you use for this skill, etc." />
+          <textarea v-model="info" placeholder="Special information about you with this skill, tools you use for this skill, etc." />
         </div>
         <div class="actions">
           <button class="primary-btn white" @click="$emit('close-modal')">
             Cancel
           </button>
-          <button class="primary-btn dark">
+          <button class="primary-btn dark" @click="addSkill">
+            <Loader v-if="$store.state.loading" />
             Add Skill
           </button>
         </div>
@@ -23,7 +24,28 @@
 
 <script>
 export default {
-  name: 'NewSkill'
+  name: 'NewSkill',
+  props: {
+    skill: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+      info: ''
+    }
+  },
+  methods: {
+    async addSkill () {
+      await this.$axios.post('/skill/user', {
+        skill_id: this.skill._id,
+        user_id: this.$store.state.auth.user._id,
+        info: this.info
+      })
+      this.$emit('close-modal')
+    }
+  }
 }
 </script>
 

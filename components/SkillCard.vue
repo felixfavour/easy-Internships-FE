@@ -1,17 +1,16 @@
 <template>
   <div class="skill-card">
-    <div class="row-1">
+    <div class="row-1" :style="`background-image: url(${skill.image})`">
       <div class="bg-overlay" />
-      <div class="popular">
+      <div v-if="skill.popular" class="popular">
         Popular skill
       </div>
       <div class="skill-name">
-        Coding
+        {{ skill.name }}
       </div>
     </div>
     <div class="row-2">
       <div class="people">
-        <div class="person" />
         <div class="person" />
         <div class="person" />
         <div class="person">
@@ -19,16 +18,18 @@
         </div>
       </div>
       <div class="action">
-        <button class="primary-btn" @click="addSkillDialog = true">
+        <button v-if="mySkill" class="primary-btn danger" @click="removeSkill">
+          <Loader v-if="$store.state.loading" class="mr-6" />
+          REMOVE SKILL
+        </button>
+        <button v-else class="primary-btn" @click="addSkillDialog = true">
           + ADD SKILL
         </button>
-        <!-- <button class="primary-btn danger">
-          REMOVE SKILL
-        </button> -->
       </div>
     </div>
     <DialogAddSkill
       v-if="addSkillDialog"
+      :skill="skill"
       @close-modal="addSkillDialog = false"
     />
   </div>
@@ -38,10 +39,23 @@
 export default {
   name: 'SkillCard',
   props: {
+    skill: {
+      type: Object,
+      default: () => {}
+    },
+    mySkill: {
+      type: String,
+      default: () => null
+    }
   },
   data () {
     return {
       addSkillDialog: false
+    }
+  },
+  methods: {
+    async removeSkill () {
+      await this.$axios.delete(`/skill/user/${this.mySkill}`)
     }
   }
 }
@@ -67,14 +81,9 @@ export default {
   .row-1 {
     height: 120px;
     position: relative;
-    background-image: url('~assets/images/coding.png');
+    background: #cecece no-repeat;
+    background-size: cover;
     border-radius: 8px 8px 0 0;
-  }
-  .row-1:nth-child(2) {
-    background-image: url('~assets/images/marketing.png');
-  }
-  .row-1:nth-child(3) {
-    background-image: url('~assets/images/social-media.png');
   }
   .skill-name {
     font-weight: 600;
@@ -98,7 +107,7 @@ export default {
   .bg-overlay {
     inset: 0;
     position: absolute;
-    background: #00000060;
+    background: #00000070;
     border-radius: 8px 8px 0 0;
   }
   .row-2 {
