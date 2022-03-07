@@ -56,6 +56,7 @@ export default {
     async findUserByUsername () {
       const user = await this.$axios.get(`/user/username/${this.$route.params.user}`)
       this.user = user.data.data
+      this.$store.commit('auth/setStudentSchool', this.user)
     },
     async login () {
       const res = await this.$axios.post('/auth/login', {
@@ -65,6 +66,7 @@ export default {
       })
       this.$toasted.success('Login successful')
       this.$store.commit('auth/setToken', res.data.data.token)
+      this.$store.commit('auth/setUser', res.data.data.user)
       this.$router.push('/employer/popular')
     }
   }

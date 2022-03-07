@@ -40,7 +40,7 @@
     </ul>
     <ul class="actions logout">
       <li>
-        <button>
+        <button @click="logOut()">
           <IconLogOut />
           <span>Log out</span>
         </button>
@@ -51,7 +51,13 @@
 
 <script>
 export default {
-  name: 'Sidebar'
+  name: 'Sidebar',
+  methods: {
+    logOut () {
+      this.$router.push(`/${this.$store.state.auth.studentSchool.username}/login`)
+      this.$store.commit('auth/logOut')
+    }
+  }
 }
 </script>
 
