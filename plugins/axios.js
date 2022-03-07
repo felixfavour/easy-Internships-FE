@@ -5,10 +5,9 @@
 export default function ({ $axios, store }) {
   $axios.onError((error) => {
     const parsedError = (error.response ? error.response.data.msg : null)
-    store.dispatch('errorDispatch', (parsedError === undefined ? error.response.data : parsedError))
-    if (parsedError?.toLowerCase() === 'invalid or expired jwt' || parsedError?.toLowerCase().includes('app with that secret key') || parsedError?.toLowerCase().includes('malformed jwt')) {
-      window.location.pathname = '/login'
-      store.dispatch('newRoute', window.location.pathname)
+    store.dispatch('errorDispatch', (parsedError || error.response.data))
+    if (parsedError?.toLowerCase() === 'invalid authorization header') {
+      window.location.pathname = `/${store.state.auth.studentSchool.username}/login`
     }
   })
   $axios.onRequest((_config) => {

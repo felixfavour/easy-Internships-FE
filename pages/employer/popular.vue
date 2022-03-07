@@ -9,8 +9,9 @@
     />
     <div class="section">
       <div class="inner">
-        <div class="card-grid">
-          <EmployerCard v-for="index in 6" :key="index" />
+        <LargeLoader v-if="$store.state.loading && loading === 'popular'" />
+        <div v-else class="card-grid">
+          <EmployerCard v-for="employer in employers" :key="employer._id" :employer="employer" />
         </div>
       </div>
     </div>
@@ -20,7 +21,23 @@
 <script>
 export default {
   name: 'PopularEmployers',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  data () {
+    return {
+      employers: [],
+      loading: ''
+    }
+  },
+  created () {
+    this.getPopularEmployers()
+  },
+  methods: {
+    async getPopularEmployers () {
+      this.loading = 'popular'
+      const employers = await this.$axios.get('/employer/popular')
+      this.employers = employers.data.data
+    }
+  }
 }
 </script>
 

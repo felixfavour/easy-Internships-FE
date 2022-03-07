@@ -1,18 +1,18 @@
 <template>
   <div class="employer-card">
     <div class="row row-1">
-      <div class="logo" style="" />
+      <div class="logo" :style="`background-image: url(${employer.user[0].icon})`" />
       <div class="info-1">
         <div class="name">
-          Google Inc.
+          {{ employer.user[0].full_name }}
         </div>
-        <IconStarRating rating="3.5" />
+        <IconStarRating :rating="employer.rating" />
       </div>
     </div>
     <div class="row row-2">
       <div class="col col-1">
         <div class="main">
-          50-100
+          {{ employer.company_size }}
         </div>
         <div class="sub">
           Employees
@@ -20,7 +20,7 @@
       </div>
       <div class="col col-2">
         <div class="main">
-          Difficult
+          {{ employer.interviews_difficulty || '- - -' }}
         </div>
         <div class="sub">
           Interviews
@@ -28,7 +28,7 @@
       </div>
       <div class="col col-3">
         <div class="main">
-          Abu Dhabi
+          {{ employer.user[0].location || '- - -' }}
         </div>
         <div class="sub">
           Location
@@ -48,7 +48,23 @@
 
 <script>
 export default {
-  name: 'EmployerCard'
+  name: 'EmployerCard',
+  props: {
+    employer: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+    }
+  },
+  methods: {
+    async getUser () {
+      const user = await this.$axios(`/user/${this.employer.user_id}`)
+      this.user = user.data.data
+    }
+  }
 }
 </script>
 
