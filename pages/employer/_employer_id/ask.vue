@@ -8,24 +8,26 @@
           </div>
           <div class="reviews-list">
             <div class="form-group">
-              <textarea v-model="question" placeholder="I want to know..." />
-              <button v-show="question !== ''" class="primary-btn come-down-sm">
-                Ask Away <IconSend class="btn-icon" />
+              <input v-model="questionTitle" type="text" placeholder="Give a concise question header">
+            </div>
+            <div class="form-group">
+              <textarea v-model="questionText" placeholder="Tell us more about your question" />
+              <button :disabled="!(questionText !== '' && questionTitle !== '')" class="primary-btn come-down-sm" @click="askQuestion">
+                Ask Away
+                <Loader v-if="$store.state.loading" class="mr-6" />
+                <IconSend v-else class="btn-icon" />
               </button>
             </div>
           </div>
         </section>
         <section>
           <div class="header">
-            Questions Asked (20)
+            Questions Asked ({{ questions.length }})
           </div>
           <div class="reviews-list">
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
+            <QuestionCard v-for="question in questions" :key="question._id" :question="question" />
           </div>
-          <button class="clear-btn">
+          <button v-if="questions.length > 4" class="clear-btn">
             View More Questions
           </button>
         </section>
@@ -38,15 +40,39 @@
 export default {
   name: 'AskCompany',
   layout: 'dashLayout',
+  props: {
+    questions: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
-      question: ''
+      questionTitle: '',
+      questionText: ''
+    }
+  },
+  methods: {
+    async askQuestion () {
+      await this.$axios.post('/employer/question', {
+        user_id: this.$store.state.auth.user._id,
+        employer_id: this.$route.params.employer_id,
+        title: this.questionTitle,
+        body: this.questionText,
+        votes: 0,
+        user_voted: false,
+        answers: 0,
+        answered: false
+      })
     }
   }
 }
 </script>
 
 <style scoped>
+  input {
+    padding: 0 24px;
+  }
   .clear-btn {
     margin-top: 12px;
     width: 100%;

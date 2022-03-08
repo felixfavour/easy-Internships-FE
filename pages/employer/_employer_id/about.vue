@@ -46,19 +46,6 @@ export default {
       type: Object,
       default: () => {}
     }
-  },
-  // data () {
-  //   return {
-  //     employer: {}
-  //   }
-  // },
-  created () {
-    // this.getEmployer()
-  },
-  methods: {
-    // async getEmployer () {
-    //   const employer = await this.$axios.get(`/employer/${this.$route.params.employer_id}`)
-    // }
   }
 }
 </script>

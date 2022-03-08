@@ -448,7 +448,7 @@ a.disabled {
   -o-transition: 0.3s;
 }
 .form-group input::placeholder, .form-group textarea::placeholder {
-  color: #4568d149;
+  color: #2a47a07a;
   font-size: 1rem;
 }
 .form-group textarea {

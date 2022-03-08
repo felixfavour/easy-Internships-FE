@@ -7,10 +7,7 @@
             Employer's Roles
           </div>
           <div class="salaries-grid">
-            <RoleCard />
-            <RoleCard />
-            <RoleCard />
-            <RoleCard />
+            <RoleCard v-for="role in roles" :key="role._id" :role="role.roles[0]" />
           </div>
         </section>
       </div>
@@ -21,7 +18,17 @@
 <script>
 export default {
   name: 'EmployerRoles',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  props: {
+    employer: {
+      type: Object,
+      default: () => {}
+    },
+    roles: {
+      type: Array,
+      default: () => {}
+    }
+  }
 }
 </script>
 

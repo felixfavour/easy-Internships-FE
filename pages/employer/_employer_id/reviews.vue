@@ -7,10 +7,7 @@
             Reviews
           </div>
           <div class="reviews-list">
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            <ReviewCard v-for="review in reviews" :key="review._id" :review="review" />
           </div>
         </section>
       </div>
@@ -21,7 +18,17 @@
 <script>
 export default {
   name: 'EmployerReviews',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  props: {
+    employer: {
+      type: Object,
+      default: () => {}
+    },
+    reviews: {
+      type: Array,
+      default: () => {}
+    }
+  }
 }
 </script>
 

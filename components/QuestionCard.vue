@@ -6,7 +6,7 @@
         <!-- <IconUpvote /> -->
       </button>
       <span>
-        127
+        {{ question.votes }}
       </span>
       <button class="clear-btn">
         <!-- <IconDownvote :filled="true" /> -->
@@ -17,22 +17,22 @@
       <div class="row row-1">
         <div class="main">
           <div class="text-main">
-            Their lovely work culture
+            {{ question.title }}
           </div>
           <div class="text-sub">
-            asked on 26 Aug, 2021
+            asked on {{ formatDate(question.createdAt) }}
           </div>
         </div>
       </div>
       <p class="row row-2">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor adipisci vel iusto iure beatae nemo, quasi perspiciatis neque? Aliquid repudiandae minima possimus culpa aut, expedita, voluptate laudantium sed quas, mollitia hic saepe maxime tenetur libero eveniet eum voluptatem. Laudantium cupiditate beatae accusamus aliquam et, fuga fugiat alias eos ipsam nulla.
+        {{ question.body }}
       </p>
       <div class="row row-3">
         <nuxt-link to="/employer/id/question#answer" class="primary-btn">
           Add Answer
         </nuxt-link>
-        <nuxt-link v-if="!$route.name.includes('question_id')" to="/employer/id/question" class="primary-btn outlined">
-          See 25 Answers
+        <nuxt-link v-if="!$route.name.includes('question_id') && question.answers > 0" to="/employer/id/question" class="primary-btn outlined">
+          See {{ question.answers }} {{ question.answers === 1 ? 'Answer' : 'Answers' }}
           <IconArrowRight class="icon" />
         </nuxt-link>
       </div>
@@ -42,7 +42,34 @@
 
 <script>
 export default {
-  name: 'QuestionCard'
+  name: 'QuestionCard',
+  props: {
+    question: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    formatDate (dateString) {
+      const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ]
+      const date = new Date(dateString)
+      const month = months[date.getMonth()]
+      return `${month} ${date.getDay()}, ${date.getFullYear()}`
+    }
+  }
 }
 </script>
 

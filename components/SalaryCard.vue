@@ -3,15 +3,15 @@
     <div class="row row-1">
       <div class="main">
         <div class="text-main">
-          Accounting Sales Representative
+          {{ salary.role_name }}
         </div>
         <div class="text-sub">
-          7 submissions
+          - - - submissions
         </div>
       </div>
       <div class="salary">
         <h2 class="count">
-          AED 20,000
+          {{ formatNumber(salary.amount) }}
         </h2>
         <div class="text-sub">
           Avg. salary per month
@@ -22,7 +22,7 @@
       <!-- GREEN METRIC -->
       <div class="metric">
         <IconGreenArrow class="icon" />
-        25% higher than other companies
+        - - - % higher than other companies
       </div>
 
       <!-- RED METRIC -->
@@ -36,7 +36,18 @@
 
 <script>
 export default {
-  name: 'SalaryCard'
+  name: 'SalaryCard',
+  props: {
+    salary: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    formatNumber (num) {
+      return 'AED ' + num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+  }
 }
 </script>
 

@@ -7,10 +7,7 @@
             Average Salaries
           </div>
           <div class="salaries-grid">
-            <SalaryCard />
-            <SalaryCard />
-            <SalaryCard />
-            <SalaryCard />
+            <SalaryCard v-for="salary in salaries" :key="salary._id" :salary="salary" />
           </div>
         </section>
       </div>
@@ -21,7 +18,17 @@
 <script>
 export default {
   name: 'EmployerSalaries',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  props: {
+    employer: {
+      type: Object,
+      default: () => {}
+    },
+    salaries: {
+      type: Array,
+      default: () => {}
+    }
+  }
 }
 </script>
 

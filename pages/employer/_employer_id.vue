@@ -14,13 +14,13 @@
               About
             </nuxt-link>
             <nuxt-link :to="`/employer/${employer._id}/reviews`" :class="['primary-btn', ($route.name.includes('reviews') ? 'active' : '')]">
-              Reviews (20)
+              Reviews ({{ reviews.length }})
             </nuxt-link>
             <nuxt-link :to="`/employer/${employer._id}/salaries`" :class="['primary-btn', ($route.name.includes('salaries') ? 'active' : '')]">
-              Salaries (10)
+              Salaries ({{ salaries.length }})
             </nuxt-link>
             <nuxt-link :to="`/employer/${employer._id}/roles`" :class="['primary-btn', ($route.name.includes('roles') ? 'active' : '')]">
-              Roles (8)
+              Roles ({{ roles.length }})
             </nuxt-link>
             <nuxt-link :to="`/employer/${employer._id}/ask`" :class="['primary-btn', ($route.name.includes('ask') ? 'active' : '')]">
               Ask Company
@@ -29,7 +29,14 @@
         </div>
       </div>
     </section>
-    <NuxtChild v-if="employer.user" :employer="employer" />
+    <NuxtChild
+      v-if="employer.user"
+      :employer="employer"
+      :salaries="salaries"
+      :reviews="reviews"
+      :roles="roles"
+      :questions="questions"
+    />
   </div>
 </template>
 
@@ -39,16 +46,42 @@ export default {
   layout: 'dashLayout',
   data () {
     return {
-      employer: {}
+      employer: {},
+      reviews: [],
+      salaries: [],
+      roles: [],
+      questions: [],
+      loading: 'all'
     }
   },
   created () {
     this.getEmployer()
+    this.getReviews()
+    this.getRoles()
+    this.getSalaries()
+    this.getQuestions()
   },
   methods: {
     async getEmployer () {
       const employer = await this.$axios.get(`/employer/${this.$route.params.employer_id}`)
       this.employer = employer.data.data
+      this.loading = ''
+    },
+    async getReviews () {
+      const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/review`)
+      this.reviews = reviews.data.data
+    },
+    async getSalaries () {
+      const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/salary`)
+      this.salaries = reviews.data.data
+    },
+    async getRoles () {
+      const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/role`)
+      this.roles = reviews.data.data
+    },
+    async getQuestions () {
+      const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/question`)
+      this.questions = reviews.data.data
     }
   }
 }

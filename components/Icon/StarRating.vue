@@ -13,8 +13,8 @@ export default {
   name: 'StarRating',
   props: {
     rating: {
-      type: String,
-      default: () => ''
+      type: Number,
+      default: () => 0
     },
     brackets: {
       type: Boolean,

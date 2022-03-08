@@ -3,31 +3,25 @@
     <div class="row row-1">
       <div class="main">
         <div class="text-main">
-          Their lovely work culture
+          {{ review.title }}
         </div>
         <div class="text-sub">
-          Software Engineer, 2019 till date - posted on 26 Aug, 2021
+          {{ review.user_tagline }}
         </div>
       </div>
       <div class="rating">
         <h2 class="count">
-          4.0
+          {{ review.rating }}
         </h2>
-        <IconStarRating rating="4.0" :brackets="false" />
+        <IconStarRating :rating="review.rating" :brackets="false" />
       </div>
     </div>
     <p class="row row-2">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor adipisci vel iusto iure beatae nemo, quasi perspiciatis neque? Aliquid repudiandae minima possimus culpa aut, expedita, voluptate laudantium sed quas, mollitia hic saepe maxime tenetur libero eveniet eum voluptatem. Laudantium cupiditate beatae accusamus aliquam et, fuga fugiat alias eos ipsam nulla.
+      {{ review.body }}
     </p>
     <div class="row row-3">
-      <button class="chip-btn">
-        Salary
-      </button>
-      <button class="chip-btn">
-        Management
-      </button>
-      <button class="chip-btn">
-        Work/Life
+      <button v-for="tag in review.tags" :key="tag" class="chip-btn">
+        {{ tag }}
       </button>
     </div>
   </div>
@@ -35,7 +29,13 @@
 
 <script>
 export default {
-  name: 'ReviewCard'
+  name: 'ReviewCard',
+  props: {
+    review: {
+      type: Object,
+      default: () => {}
+    }
+  }
 }
 </script>
 
