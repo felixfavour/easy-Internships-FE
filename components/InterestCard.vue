@@ -22,7 +22,18 @@
 
 <script>
 export default {
-  name: 'EmployerCard'
+  name: 'EmployerCard',
+  props: {
+    interest: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    async removeInterest () {
+      await this.$axios.delete(`/interest/remove/${this.mySkill}`)
+    }
+  }
 }
 </script>
 

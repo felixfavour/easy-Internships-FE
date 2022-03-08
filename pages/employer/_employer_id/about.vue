@@ -4,29 +4,32 @@
       <div class="inner">
         <section class="about">
           <div class="header">
-            About Google
+            About {{ employer.user.full_name }}
           </div>
           <p class="content">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur asperiores aspernatur esse sapiente ducimus alias repudiandae eligendi cumque temporibus voluptates, omnis a inventore dolorum pariatur, facilis provident perspiciatis vel odio beatae laboriosam exercitationem nostrum mollitia quaerat adipisci! Incidunt, ipsum fugit asperiores quod totam non assumenda. Modi maxime aperiam blanditiis maiores?
+            {{ employer.user.tagline || 'No description' }}
           </p>
         </section>
         <section class="about">
           <div class="header">
-            Google in cards
+            {{ employer.user.full_name }} in cards
           </div>
           <div class="sub-header">
             Brief description of company in cards
           </div>
           <div class="content card-grid">
-            <InfoCard :info="{ label: 'CEO', value: 'Favour Felix' }" />
-            <InfoCard :info="{ label: 'Founded', value: '2021' }" />
-            <InfoCard :info="{ label: 'Business Sector', value: 'Technology' }" />
+            <InfoCard :info="{ label: 'CEO', value: '- - -' }" />
+            <InfoCard :info="{ label: 'Location', value: employer.user.location }" />
+            <InfoCard :info="{ label: 'Founded', value: '- - -' }" />
+            <InfoCard :info="{ label: 'Business Sector', value: employer.company_sector }" />
           </div>
         </section>
         <section class="about">
           <div class="content">
             <img src="~assets/images/employer-bg.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia molestias aperiam autem eius delectus fugiat ea laborum labore fugit adipisci rerum, laudantium asperiores dolores expedita a totam corrupti quam itaque impedit commodi cum fuga eaque? Repudiandae veniam fuga voluptas dolor! Quod voluptatibus ut fugiat porro cumque expedita molestias cum sint.</p>
+            <p>
+              {{ employer.user.about }}
+            </p>
           </div>
         </section>
       </div>
@@ -37,7 +40,26 @@
 <script>
 export default {
   name: 'AboutEmployer',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  props: {
+    employer: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  // data () {
+  //   return {
+  //     employer: {}
+  //   }
+  // },
+  created () {
+    // this.getEmployer()
+  },
+  methods: {
+    // async getEmployer () {
+    //   const employer = await this.$axios.get(`/employer/${this.$route.params.employer_id}`)
+    // }
+  }
 }
 </script>
 

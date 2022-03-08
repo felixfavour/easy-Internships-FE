@@ -9,9 +9,11 @@
     />
     <div class="page section">
       <div class="inner">
-        <div class="card-grid">
+        <LargeLoader v-if="$store.state.loading" />
+        <div v-else-if="interests.length > 0 && !$store.state.loading" class="card-grid">
           <InterestCard v-for="index in 5" :key="index" />
         </div>
+        <EmptyState v-else text="You have made no interests in employers." />
       </div>
     </div>
   </div>
@@ -20,7 +22,21 @@
 <script>
 export default {
   name: 'Interests',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  data () {
+    return {
+      interests: []
+    }
+  },
+  created () {
+    this.getMyInterests()
+  },
+  methods: {
+    async getMyInterests () {
+      const interests = await this.$axios.get(`/interest/${this.$store.state.auth.user._id}`)
+      this.interests = interests.data.data
+    }
+  }
 }
 </script>
 

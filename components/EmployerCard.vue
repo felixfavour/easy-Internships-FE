@@ -36,10 +36,13 @@
       </div>
     </div>
     <div class="row row-3 actions">
-      <button class="primary-btn outlined">
+      <!-- <button class="primary-btn outlined" @click="addInterest">
         I'm Interested
       </button>
-      <nuxt-link class="primary-btn" to="/employer/id/about">
+      <button class="primary-btn outlined" @click="removeInterest">
+        - Remove
+      </button> -->
+      <nuxt-link class="primary-btn" :to="`/employer/${employer._id}/about`">
         See More
       </nuxt-link>
     </div>
@@ -57,12 +60,25 @@ export default {
   },
   data () {
     return {
+      interested: undefined
     }
   },
   methods: {
     async getUser () {
-      const user = await this.$axios(`/user/${this.employer.user_id}`)
+      const user = await this.$axios.get(`/user/${this.employer.user_id}`)
       this.user = user.data.data
+    },
+    async addInterest () {
+      await this.$axios.post('/interest/add', {
+        interested_user_id: this.$store.state.auth.user._id,
+        interested_user_type: this.$store.state.auth.user.type,
+        interesting_user_id: this.employer.user[0]._id,
+        interesting_user_type: this.employer.user[0].student
+      })
+      this.interested = true
+    },
+    async removeInterest () {
+      await this.$axios.delete(`/interest/remove/${this.mySkill}`)
     }
   }
 }
@@ -78,6 +94,12 @@ export default {
     border: 1px solid var(--primary);
     color: var(--primary);
     background: #FFFFFF;
+    width: 130px;
+  }
+  .primary-btn.done {
+    border: 0px;
+    background: #06E402;
+    color: #FFFFFF;
     width: 130px;
   }
   .employer-card {

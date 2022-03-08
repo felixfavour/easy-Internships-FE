@@ -1,16 +1,16 @@
 <template>
   <div class="employer-banner-ctn">
-    <div :class="['bg', data.bgName]" />
+    <div :class="['bg']" />
     <div class="inner">
       <div class="texts come-up-1">
         <div class="row-1">
-          <div class="logo" />
+          <div v-if="employer.user.icon" class="logo" :style="`background-image: url(${employer.user.icon})`" />
           <div class="company-name">
-            Google Inc.
+            {{ employer.user.full_name }}
           </div>
         </div>
         <div class="row-2">
-          <IconPeople class="icon-people" /> 50-100 Employees
+          <IconPeople class="icon-people" /> {{ employer.company_size }} Employees
         </div>
       </div>
       <div class="actions come-up-2">
@@ -27,7 +27,7 @@
 export default {
   name: 'EmployerBanner',
   props: {
-    data: {
+    employer: {
       type: Object,
       default: () => {}
     }
