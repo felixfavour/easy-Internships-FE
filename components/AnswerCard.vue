@@ -6,7 +6,7 @@
         <!-- <IconUpvote /> -->
       </button>
       <span>
-        127
+        {{ answer.votes }}
       </span>
       <button class="clear-btn">
         <!-- <IconDownvote :filled="true" /> -->
@@ -17,16 +17,16 @@
       <div class="row row-1">
         <div class="main">
           <div class="text-main">
-            Their lovely work culture
+            {{ answer.user_name }} - {{ answer.user_tagline }}
           </div>
           <div class="text-sub">
             <IconPersonCheck v-if="original" class="icon" />
-            answered on 26 Aug, 2021
+            answered on {{ formatDate(answer.createdAt) }}
           </div>
         </div>
       </div>
       <p class="row row-2">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor adipisci vel iusto iure beatae nemo, quasi perspiciatis neque? Aliquid repudiandae minima possimus culpa aut, expedita, voluptate laudantium sed quas, mollitia hic saepe maxime tenetur libero eveniet eum voluptatem. Laudantium cupiditate beatae accusamus aliquam et, fuga fugiat alias eos ipsam nulla.
+        {{ answer.body }}
       </p>
     </div>
   </div>
@@ -36,9 +36,34 @@
 export default {
   name: 'AnswerCard',
   props: {
+    answer: {
+      type: Object,
+      default: () => {}
+    },
     original: {
       type: Boolean,
       default: () => false
+    }
+  },
+  methods: {
+    formatDate (dateString) {
+      const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ]
+      const date = new Date(dateString)
+      const month = months[date.getMonth()]
+      return `${month} ${date.getDay()}, ${date.getFullYear()}`
     }
   }
 }

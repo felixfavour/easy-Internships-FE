@@ -1,30 +1,32 @@
 <template>
   <!-- THIS IS A LAYOUT-PAGE WITH NESTED PAGES -->
-  <div class="employer-layout">
+  <div v-if="question !== null" class="employer-layout">
     <div class="question-banner">
-      <QuestionCard />
+      <QuestionCard :question="question" :question-page="true" />
     </div>
     <div class="section">
       <div class="inner">
         <section>
           <div class="header">
-            Answers (25)
+            Answers ({{ answers.length }})
           </div>
           <div class="reviews-list">
-            <AnswerCard :original="true" />
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
+            <AnswerCard v-for="answer in answers" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
           </div>
         </section>
         <section id="answer">
-          <div class="header">
+          <div v-if="answers.length === 0" class="header">
+            Be the first to answer this question
+          </div>
+          <div v-else class="header">
             Your Answer
           </div>
           <div class="form-group">
-            <textarea v-model="question" placeholder="I want to know..." />
-            <button v-show="question !== ''" class="primary-btn come-down-sm">
-              Ask Away <IconSend class="btn-icon" />
+            <textarea v-model="answerContent" placeholder="I want to know..." />
+            <button :disabled="!(answerContent !== '')" class="primary-btn come-down-sm" @click="addAnswer">
+              Answer
+              <Loader v-if="$store.state.loading" class="mr-6" />
+              <IconSend v-else class="btn-icon" />
             </button>
           </div>
         </section>
@@ -37,9 +39,32 @@
 export default {
   name: 'EmployerDetails',
   layout: 'dashLayout',
+  props: {
+    answers: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
-      question: ''
+      question: this.$store.state.currentQuestion,
+      answerContent: '',
+      count: 0
+    }
+  },
+  methods: {
+    async addAnswer () {
+      await this.$axios.post('/employer/answer', {
+        user_id: this.$store.state.auth.user._id,
+        user_name: this.$store.state.auth.user.full_name,
+        user_tagline: this.$store.state.auth.user.tagline || '',
+        question_id: this.$route.params.question_id,
+        employer_id: this.$route.params.employer_id,
+        title: undefined,
+        body: this.answerContent,
+        votes: 0,
+        user_voted: false
+      })
     }
   }
 }

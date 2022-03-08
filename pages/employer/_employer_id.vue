@@ -36,6 +36,7 @@
       :reviews="reviews"
       :roles="roles"
       :questions="questions"
+      :answers="answers"
     />
   </div>
 </template>
@@ -51,7 +52,17 @@ export default {
       salaries: [],
       roles: [],
       questions: [],
+      answers: [],
       loading: 'all'
+    }
+  },
+  watch: {
+    $route (val) {
+      if (val.name.includes('question')) {
+        this.getAnswers()
+      } else {
+        this.answers = []
+      }
     }
   },
   created () {
@@ -60,6 +71,7 @@ export default {
     this.getRoles()
     this.getSalaries()
     this.getQuestions()
+    this.getAnswers()
   },
   methods: {
     async getEmployer () {
@@ -82,6 +94,13 @@ export default {
     async getQuestions () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/question`)
       this.questions = reviews.data.data
+    },
+    async getAnswers () {
+      const answers = await this.$axios.get(`/employer/question/${this.$route.params.question_id}/answer`)
+      answers.data.data.sort((a, b) => {
+        return a.user_id > b.user_id ? 1 : -1
+      })
+      this.answers = answers.data.data
     }
   }
 }

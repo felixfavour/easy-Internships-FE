@@ -27,11 +27,20 @@
       <p class="row row-2">
         {{ question.body }}
       </p>
-      <div class="row row-3">
-        <nuxt-link to="/employer/id/question#answer" class="primary-btn">
+      <div v-if="!questionPage" class="row row-3">
+        <nuxt-link
+          :to="`/employer/${$route.params.employer_id}/${question._id}#answer`"
+          class="primary-btn"
+          @click.native="$store.commit('setCurrentQuestion', question)"
+        >
           Add Answer
         </nuxt-link>
-        <nuxt-link v-if="!$route.name.includes('question_id') && question.answers > 0" to="/employer/id/question" class="primary-btn outlined">
+        <nuxt-link
+          v-if="!$route.name.includes('question_id') && question.answers > 0"
+          :to="`/employer/${$route.params.employer_id}/${question._id}`"
+          class="primary-btn outlined"
+          @click.native="$store.commit('setCurrentQuestion', question)"
+        >
           See {{ question.answers }} {{ question.answers === 1 ? 'Answer' : 'Answers' }}
           <IconArrowRight class="icon" />
         </nuxt-link>
@@ -47,6 +56,10 @@ export default {
     question: {
       type: Object,
       default: () => {}
+    },
+    questionPage: {
+      type: Boolean,
+      default: () => false
     }
   },
   methods: {

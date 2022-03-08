@@ -1,7 +1,8 @@
 export const state = () => ({
   loading: false,
   error: null,
-  success: null
+  success: null,
+  currentQuestion: null
 })
 
 export const mutations = ({
@@ -10,6 +11,9 @@ export const mutations = ({
   },
   setError (state, value) {
     state.error = value
+  },
+  setCurrentQuestion (state, value) {
+    state.currentQuestion = value
   }
 })
 
