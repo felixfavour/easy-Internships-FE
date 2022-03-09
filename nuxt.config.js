@@ -2,6 +2,9 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'server',
   ssr: false,
+  env: {
+    API: 'localhost:5000/v1'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

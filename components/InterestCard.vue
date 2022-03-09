@@ -1,19 +1,19 @@
 <template>
   <div class="employer-card">
     <div class="row row-1">
-      <div class="logo" style="" />
+      <div class="logo" :style="`background-image: url(${interest.user[0].icon})`" />
       <div class="info-1">
         <div class="name">
-          Google Inc.
+          {{ interest.user[0].full_name }}
         </div>
-        <IconStarRating rating="3.5" />
+        <IconStarRating :rating="interest.employer[0].rating" />
       </div>
     </div>
     <div class="row row-3 actions">
-      <button class="primary-btn outlined">
-        I'm Interested
+      <button class="primary-btn outlined" @click="removeInterest">
+        <span>Remove</span>
       </button>
-      <nuxt-link class="primary-btn" to="/employer/id/about">
+      <nuxt-link class="primary-btn" :to="`/employer/${interest.employer[0]._id}/about`">
         See More
       </nuxt-link>
     </div>
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     async removeInterest () {
-      await this.$axios.delete(`/interest/remove/${this.mySkill}`)
+      await this.$axios.delete(`/interest/remove/${this.interest._id}`)
     }
   }
 }
@@ -48,6 +48,10 @@ export default {
     color: var(--primary);
     background: #FFFFFF;
     width: 130px;
+  }
+  .primary-btn.outlined:hover {
+    border-color: #E80000;
+    color: #E80000
   }
   .employer-card {
     background: #FFFFFF;

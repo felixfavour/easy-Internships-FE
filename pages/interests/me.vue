@@ -11,7 +11,7 @@
       <div class="inner">
         <LargeLoader v-if="$store.state.loading" />
         <div v-else-if="interests.length > 0 && !$store.state.loading" class="card-grid">
-          <InterestCard v-for="index in 5" :key="index" />
+          <InterestCard v-for="interest in interests" :key="interest._id" :interest="interest" />
         </div>
         <EmptyState v-else text="You have made no interests in employers." />
       </div>
