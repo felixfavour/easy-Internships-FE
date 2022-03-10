@@ -38,6 +38,17 @@
       </section>
       <section v-show="section === 2">
         <div class="form-group">
+          <select id="location" name="location">
+            <option v-for="size in $store.state.companySizes" :key="size" :value="size">
+              {{ size }} Employees
+            </option>
+          </select>
+          <label for="location">
+            Number of Employees
+          </label>
+          <IconArrowDown class="icon" />
+        </div>
+        <div class="form-group">
           <div class="tel-flex">
             <img src="~assets/images/uae-flag.png" alt="">
             <span>+971</span>
@@ -49,30 +60,23 @@
         </div>
         <div class="form-group">
           <select id="location" name="location">
-            <option value="Abu Dhabi">
-              Abu Dhabi
-            </option>
-            <option value="Dubai">
-              Dubai
-            </option>
-            <option value="Sharjah">
-              Sharjah
-            </option>
-            <option value="Ajman">
-              Ajman
-            </option>
-            <option value="Umm Al-Quwain">
-              Umm Al-Quwain
-            </option>
-            <option value="Fujairah">
-              Fujairah
-            </option>
-            <option value="Ras Al Khaimah">
-              Ras Al Khaimah
+            <option v-for="location in $store.state.locations" :key="location" :value="location">
+              {{ location }}
             </option>
           </select>
           <label for="location">
             Company Location
+          </label>
+          <IconArrowDown class="icon" />
+        </div>
+        <div class="form-group">
+          <select id="sector" name="sector">
+            <option v-for="sector in $store.state.sectors" :key="sector" :value="sector">
+              {{ sector }}
+            </option>
+          </select>
+          <label for="location">
+            Company Sector
           </label>
           <IconArrowDown class="icon" />
         </div>

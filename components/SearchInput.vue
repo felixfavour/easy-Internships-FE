@@ -1,6 +1,6 @@
 <template>
   <div class="search-input">
-    <input placeholder="Search company or sector" type="text" @input="addSearchQuery($event.target.value)">
+    <input placeholder="Search Employers" type="text" @input="addSearchQuery($event.target.value)">
     <IconSearch />
   </div>
 </template>
@@ -10,11 +10,7 @@ export default {
   name: 'SearchInput',
   methods: {
     addSearchQuery (query) {
-      if (query.length > 0) {
-        this.$router.push(`${this.$route.path}?query=${query}`)
-      } else {
-        this.$router.push(this.$route.path)
-      }
+      this.$emit('search', query)
     }
   }
 }

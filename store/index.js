@@ -2,7 +2,11 @@ export const state = () => ({
   loading: false,
   error: null,
   success: null,
-  currentQuestion: null
+  currentQuestion: null,
+  currentEmployer: null,
+  sectors: ['Technology', 'Healthcare', 'Finance', 'Energy', 'Real Estate', 'Retail', 'Utilities', 'Agriculture', 'Other'],
+  companySizes: ['0 - 10', '10 - 50', '50 - 100', '100 - 500', '500 - 1000', '1000+'],
+  locations: ['Abu Dhabi', 'Dubai', 'Sharjah', 'Ajman', 'Umm Al-Quwain', 'Fujairah', 'Ras Al Khaimah']
 })
 
 export const mutations = ({

@@ -2,33 +2,34 @@
   <div class="employee-filter">
     <div class="form-row">
       <div class="form-group">
-        <select id="" name="">
-          <option selected disabled value="">
-            No. of Employees
+        <select id="location" v-model="filterBy.company_location" name="location">
+          <option selected :value="undefined">
+            Company Location
+          </option>
+          <option v-for="location in $store.state.locations" :key="location" :value="location">
+            {{ location }}
           </option>
         </select>
         <IconArrowDown class="icon" />
       </div>
       <div class="form-group">
-        <select id="" name="">
-          <option selected disabled value="">
-            Location
+        <select id="location" v-model="filterBy.company_size" name="location">
+          <option selected :value="undefined">
+            Company Size
+          </option>
+          <option v-for="size in $store.state.companySizes" :key="size" :value="size">
+            {{ size }} Employees
           </option>
         </select>
         <IconArrowDown class="icon" />
       </div>
       <div class="form-group">
-        <select id="" name="">
-          <option selected disabled value="">
-            Company
+        <select id="sector" v-model="filterBy.company_sector" name="sector">
+          <option selected :value="undefined">
+            Company Sector
           </option>
-        </select>
-        <IconArrowDown class="icon" />
-      </div>
-      <div class="form-group">
-        <select id="" name="">
-          <option selected disabled value="">
-            Job Title
+          <option v-for="sector in $store.state.sectors" :key="sector" :value="sector">
+            {{ sector }}
           </option>
         </select>
         <IconArrowDown class="icon" />
@@ -39,7 +40,25 @@
 
 <script>
 export default {
-  name: 'EmployeeFilter'
+  name: 'EmployeeFilter',
+  data () {
+    return {
+      filterBy: {
+        company_sector: undefined,
+        company_size: undefined,
+        company_location: undefined
+      }
+    }
+  },
+  watch: {
+    filterBy: {
+      deep: true,
+      immediate: true,
+      handler (val) {
+        this.$emit('filter', this.filterBy)
+      }
+    }
+  }
 }
 </script>
 
@@ -47,7 +66,7 @@ export default {
   .form-row {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 24%);
+    grid-template-columns: repeat(3, 32%);
   }
   .form-group {
     margin: 0;

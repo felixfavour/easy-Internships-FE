@@ -2,18 +2,23 @@
   <div class="employers-ctn section page">
     <div class="inner">
       <div class="employers-header">
-        <SearchInput class="outlined" />
+        <SearchInput class="outlined" @search="searchEmployers($event); searchQuery = $event" />
         <button :class="{ 'clear-btn filter-btn': true, 'active': filterMode }" @click="filterMode = !filterMode">
-          <IconFilter />
-          <span>Filter Results</span>
+          <IconFilter v-if="!filterMode" class="come-down-sm" />
+          <IconCloseNoCircle v-if="filterMode" class="come-down-sm" />
+          <span v-show="!filterMode" class="come-down-sm">Filter Results</span>
+          <span v-show="filterMode" class="come-down-sm">Clear Filters</span>
         </button>
       </div>
-      <EmployeeFilter :class="filterMode ? 'expand' : 'contract'" />
-      <div v-if="$route.query.query !== undefined" class="results-header come-down-sm">
-        Companies for "{{ $route.query.query }}"
+      <EmployeeFilter :class="filterMode ? 'expand' : 'contract'" @filter="filterBy = $event; filterEmployers()" />
+      <div v-if="searchQuery !== ''" class="results-header come-down-sm">
+        Companies for "{{ searchQuery }}"
       </div>
-      <div class="card-grid">
-        <EmployerCard v-for="index in 12" :key="index" />
+      <div v-if="!filterMode" class="card-grid">
+        <EmployerCard v-for="employer in employers" :key="employer._id" :employer="employer" />
+      </div>
+      <div v-else class="card-grid">
+        <EmployerCard v-for="employer in filteredEmployers" :key="employer._id" :employer="employer" />
       </div>
     </div>
   </div>
@@ -25,8 +30,55 @@ export default {
   layout: 'dashLayout',
   data () {
     return {
+      mode: 'DEFAULT', // other modes are 'SEARCH' and 'FILTER'
+      employers: [],
       filterMode: false,
-      searchMode: false
+      filteredEmployers: [],
+      searchQuery: '',
+      filterBy: {
+        company_sector: undefined,
+        company_size: undefined,
+        company_location: undefined
+      }
+    }
+  },
+  watch: {
+    filterMode () {
+      this.filterBy = {
+        company_sector: undefined,
+        company_size: undefined,
+        company_location: undefined
+      }
+    }
+  },
+  created () {
+    this.getEmployers()
+  },
+  methods: {
+    async getEmployers () {
+      this.loading = 'popular'
+      const employers = await this.$axios.get('/employer')
+      this.employers = employers.data.data
+      this.filteredEmployers = employers.data.data
+    },
+    filterEmployers () {
+      this.filteredEmployers = [...this.employers].filter((employer) => {
+        const filter = this.filterBy
+
+        return (filter.company_location !== undefined ? employer.user[0].location === filter.company_location : true) &&
+              (filter.company_size !== undefined ? employer.company_size === filter.company_size : true) &&
+              (filter.company_sector !== undefined ? employer.company_sector === filter.company_sector : true)
+      })
+    },
+    searchEmployers (searchQuery) {
+      if (searchQuery.length === 0) {
+        this.filterMode = false
+      } else {
+        this.filterMode = true
+        this.filteredEmployers = [...this.employers].filter((employer) => {
+          return employer.user[0].full_name.toLowerCase().includes(searchQuery.toLowerCase())
+        })
+      }
     }
   }
 }
@@ -55,5 +107,24 @@ export default {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 0.8rem;
+  }
+
+  @keyframes come-down-sm {
+    0% {
+      opacity: 0;
+      transform: translateY(-3px);
+      -webkit-transform: translateY(-3px);
+      -moz-transform: translateY(-3px);
+      -ms-transform: translateY(-3px);
+      -o-transform: translateY(-3px);
+  }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+      -webkit-transform: translateY(0px);
+      -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+      -o-transform: translateY(0px);
+    }
   }
 </style>

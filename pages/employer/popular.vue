@@ -35,7 +35,7 @@ export default {
     async getPopularEmployers () {
       this.loading = 'popular'
       const employers = await this.$axios.get('/employer/popular')
-      this.employers = employers.data.data
+      this.employers = employers.data.data.filter(employer => employer !== null)
     }
   }
 }
