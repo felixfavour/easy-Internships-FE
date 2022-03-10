@@ -9,27 +9,36 @@
     />
     <div class="page section">
       <div class="inner">
-        <div class="card-grid briefs">
-          <PerformanceBriefCard :performance="{ label: 'Total Visits', value:'173' }" />
-          <PerformanceBriefCard :performance="{ label: 'Unique Visits', value:'47' }" />
-          <PerformanceBriefCard :performance="{ label: 'Academic Score', value:'85%' }" />
-          <PerformanceBriefCard :performance="{ label: 'Skills Score', value:'93%' }" />
-        </div>
-        <div class="chart-ctn">
-          <div class="chart-header">
-            <div class="text">
-              Number of Visits
-            </div>
-            <div class="form-group">
-              <select id="location" name="location">
-                <option value="1-week">
-                  Last 1 Week
-                </option>
-              </select>
-              <IconArrowDown class="icon" />
-            </div>
+        <LargeLoader v-if="$store.state.loading" />
+        <div v-else>
+          <div class="card-grid briefs">
+            <PerformanceBriefCard :performance="{ label: 'Total Visits', value: performance.total_visits }" />
+            <PerformanceBriefCard :performance="{ label: 'Unique Visits', value: performance.unique_visits }" />
+            <PerformanceBriefCard :performance="{ label: 'Academic Score', value: performance.academics_score }" />
+            <PerformanceBriefCard :performance="{ label: 'Skills Score', value: performance.skills_score }" />
           </div>
-          <ChartVisits />
+          <div class="chart-ctn">
+            <div class="chart-header">
+              <div class="text">
+                Visits on specific days.
+              </div>
+              <!-- <div class="form-group">
+                <select id="location" name="location">
+                  <option value="3-day">
+                    Last 3 days
+                  </option>
+                  <option value="1-week">
+                    Last 1 week
+                  </option>
+                  <option value="2-week">
+                    Last 2 weeks
+                  </option>
+                </select>
+                <IconArrowDown class="icon" />
+              </div> -->
+            </div>
+            <ChartVisits v-if="visits" :visits="visits" />
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +48,27 @@
 <script>
 export default {
   name: 'Performance',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  data () {
+    return {
+      performance: {},
+      visits: null
+    }
+  },
+  created () {
+    this.getPerformance()
+    this.getUserVisits()
+  },
+  methods: {
+    async getPerformance () {
+      const performance = await this.$axios.get(`/performance/${this.$store.state.auth.user._id}`)
+      this.performance = performance.data.data
+    },
+    async getUserVisits () {
+      const visits = await this.$axios.get(`/performance/visitors/${this.$store.state.auth.user._id}`)
+      this.visits = visits.data.data.reverse()
+    }
+  }
 }
 </script>
 

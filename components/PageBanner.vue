@@ -8,7 +8,9 @@
       <div class="text-2">
         {{ data.head }}
       </div>
-      <SearchInput v-if="data.hasSearch" />
+      <nuxt-link v-if="data.hasSearch" to="/employer/all" class="primary-btn">
+        See All Employers
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -26,6 +28,11 @@ export default {
 </script>
 
 <style scoped>
+  .primary-btn {
+    padding: 0 24px;
+    width: 200px;
+    background: var(--primary-dark);
+  }
   .page-banner-ctn {
     height: 300px;
     background: #007BEC40;

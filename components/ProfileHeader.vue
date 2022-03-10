@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
   .green-bg {
-    background: #06E402;
+    background: var(--green);
   }
   .auto-wh {
     width: auto;

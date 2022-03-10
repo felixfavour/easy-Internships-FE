@@ -8,21 +8,47 @@ Chart.register(...registerables)
 export default {
   name: 'VisitsChart',
   props: {
-    chartData: {
+    visits: {
       type: Array,
       default: () => []
     }
   },
   data () {
     return {
-      labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6', 'Jan 7'],
-      dataSets: [10, 32, 23, 54, 45, 33, 70]
+      labels: [],
+      dataSets: []
     }
   },
   mounted () {
-    this.mountChart()
+    this.calculateChartValues()
   },
   methods: {
+    calculateChartValues () {
+      const uniqueDates = new Set()
+      let labels = []
+      const dataSets = []
+
+      // Get unique chart labels
+      for (const data of this.visits) {
+        uniqueDates.add(data.createdAt.slice(0, 10))
+      }
+      labels = Array.from(uniqueDates)
+
+      // Use labels to get data set
+      for (const label of labels) {
+        let users = 0
+        for (const data of this.visits) {
+          if (data.createdAt.slice(0, 10) === label) {
+            users += 1
+          }
+        }
+        dataSets.push(users)
+      }
+      this.labels = this.chartDates(labels)
+      this.dataSets = dataSets
+
+      this.mountChart()
+    },
     mountChart () {
       // eslint-disable-next-line no-unused-vars
       const myChart = new Chart(this.$refs.chart, {
@@ -67,6 +93,14 @@ export default {
           }
         }
       })
+    },
+    chartDates (timestamps) {
+      const dates = []
+      for (const timestamp of timestamps) {
+        const dateString = new Date(timestamp).toDateString()
+        dates.push(dateString.replace(' ', ', ').slice(0, dateString.length - 4))
+      }
+      return dates
     }
   }
 }
