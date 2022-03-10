@@ -11,10 +11,9 @@
     </div>
     <div class="row-2">
       <div class="people">
-        <div class="person" />
-        <div class="person" />
-        <div class="person">
-          +50
+        <div v-for="user in skill.users" :key="user._id" class="person" :style="user.user_avatar ? `background-image: url(${user.user_avatar})`: ''" />
+        <div v-if="skill.total_users > 3" class="last person">
+          +{{ skill.total_users - 3 }}
         </div>
       </div>
       <div class="action">
@@ -118,6 +117,12 @@ export default {
   }
   .people {
     display: flex;
+    position: relative;
+  }
+  .last.person {
+    position: absolute;
+    left: 68px !important;
+    opacity: 0.5;
   }
   .person {
     width: 46px;
@@ -126,22 +131,22 @@ export default {
     display: grid;
     place-items: center;
     font-weight: 600;
-    font-size: 0.775rem;
+    font-size: 0.875rem;
     color: #FFFFFF;
     position: relative;
     background-size: contain;
   }
   .person:nth-child(1) {
     left: 0;
-    background-image: url('~assets/images/person1.png');
+    background-image: url('~assets/images/person.png');
   }
   .person:nth-child(2) {
     left: -12px;
-    background-image: url('~assets/images/person2.png');
+    background-image: url('~assets/images/person.png');
   }
   .person:nth-child(3) {
     left: -24px;
-    background-image: url('~assets/images/person3.png');
+    background-image: url('~assets/images/person.png');
   }
   .person:nth-child(4) {
     background: #007BEC;

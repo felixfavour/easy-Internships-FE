@@ -41,6 +41,7 @@ export default {
       await this.$axios.post('/skill/user', {
         skill_id: this.skill._id,
         user_id: this.$store.state.auth.user._id,
+        user_avatar: this.$store.state.auth.user.avatar,
         info: this.info
       })
       this.$emit('close-modal')

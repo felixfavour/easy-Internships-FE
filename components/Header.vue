@@ -7,8 +7,11 @@
         <nuxt-link v-if="$route.name === 'employer-popular'" to="/employer/all" class="primary-btn come-down-sm">
           See All Employers
         </nuxt-link>
-        <nuxt-link to="/profile/overview" class="profile">
-          <img src="~assets/images/man.png" alt="">
+        <nuxt-link v-if="$store.state.auth.user.avatar" to="/profile/overview" class="profile">
+          <img :src="user.avatar" alt="">
+        </nuxt-link>
+        <nuxt-link v-else to="/profile/overview" class="profile">
+          <img src="~assets/images/person.png" alt="">
         </nuxt-link>
       </div>
     </div>
@@ -16,8 +19,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'Header'
+  name: 'Header',
+  computed: mapState({
+    user: state => state.auth.user
+  })
 }
 </script>
 
