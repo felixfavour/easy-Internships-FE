@@ -45,6 +45,7 @@ export default {
         info: this.info
       })
       this.$emit('close-modal')
+      this.$nuxt.$emit('refresh')
     }
   }
 }

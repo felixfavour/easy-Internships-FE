@@ -69,6 +69,7 @@ export default {
   mounted () {
     this.$nuxt.$on('refresh', () => {
       this.getMySkills()
+      this.getAllSkills()
     })
   },
   methods: {

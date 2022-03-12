@@ -70,6 +70,7 @@ export default {
         image: this.imageUrl
       })
       this.$emit('close-modal')
+      this.$nuxt.$emit('refresh')
     }
   }
 }
