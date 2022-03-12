@@ -66,6 +66,11 @@ export default {
     this.getMySkills()
     this.getAllSkills()
   },
+  mounted () {
+    this.$nuxt.$on('refresh', () => {
+      this.getMySkills()
+    })
+  },
   methods: {
     async getAllSkills () {
       this.loading = 'all-skills'

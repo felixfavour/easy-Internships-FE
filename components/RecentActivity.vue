@@ -7,7 +7,7 @@
       </nuxt-link>
     </div>
     <div class="recent-activity">
-      <Activity v-for="activity in activities" :key="activity._id" :activity="activity" />
+      <Activity v-for="activity in activities.slice(0,4)" :key="activity._id" :activity="activity" />
     </div>
   </div>
 </template>

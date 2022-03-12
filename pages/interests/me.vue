@@ -31,6 +31,11 @@ export default {
   created () {
     this.getMyInterests()
   },
+  mounted () {
+    this.$nuxt.$on('refresh', () => {
+      this.getMyInterests()
+    })
+  },
   methods: {
     async getMyInterests () {
       const interests = await this.$axios.get(`/interest/${this.$store.state.auth.user._id}`)

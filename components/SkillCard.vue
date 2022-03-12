@@ -55,6 +55,7 @@ export default {
   methods: {
     async removeSkill () {
       await this.$axios.delete(`/skill/user/${this.mySkill}`)
+      this.$nuxt.$emit('refresh')
     }
   }
 }
