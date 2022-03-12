@@ -4,10 +4,13 @@
       <HeaderContent class="header-title" />
       <div class="actions">
         <!-- ACTION FOR POPULAR EMPLOYEES PAGE -->
-        <nuxt-link v-if="$route.name === 'employer-popular'" to="/employer/all" class="primary-btn come-down-sm">
+        <!-- <nuxt-link v-if="$route.name === 'employer-popular'" to="/employer/all" class="primary-btn come-down-sm">
           See All Employers
-        </nuxt-link>
+        </nuxt-link> -->
         <nuxt-link v-if="$store.state.auth.user.avatar" to="/profile/overview" class="profile">
+          <span class="name">
+            {{ user.first_name }}
+          </span>
           <img :src="user.avatar" alt="">
         </nuxt-link>
         <nuxt-link v-else to="/profile/overview" class="profile">
@@ -56,6 +59,15 @@ export default {
     font-size: 1.1rem;
     font-weight: 600;
     text-transform: capitalize;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  .name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-left: 8px;
   }
   .actions {
     display: flex;

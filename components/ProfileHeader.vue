@@ -14,8 +14,9 @@
             </button>
           </div>
           <div class="core-info">
-            <div class="name linkedin">
+            <div class="name">
               {{ user.full_name }}
+              <a v-if="user.linkedin" class="linkedin" :href="user.linkedin" />
             </div>
             <div class="course">
               {{ user.tagline }}
@@ -179,7 +180,7 @@ export default {
   .primary-btn > .icon {
     margin-right: 6px;
   }
-  .name {
+  .name, .name a {
     font-size: 1.6rem;
     font-weight: 600;
   }

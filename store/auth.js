@@ -15,8 +15,8 @@ export const mutations = ({
   setUser (state, value) {
     const user = value
     state.user = user
-    state.user.first_name = user.full_name?.split(' ')[0]
-    state.user.last_name = user.full_name.slice(user.full_name?.indexOf(' '))
+    state.user.first_name = user.full_name?.split(' ')[0]?.trim()
+    state.user.last_name = user.full_name.slice(user.full_name?.indexOf(' '))?.trim()
   },
   setStudentSchool (state, value) {
     state.studentSchool = value
