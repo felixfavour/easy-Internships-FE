@@ -5,6 +5,10 @@ export default {
   env: {
     API: 'localhost:5000/v1'
   },
+  loading: {
+    color: '#007BEC',
+    height: '5px'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

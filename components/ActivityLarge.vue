@@ -3,10 +3,10 @@
     <div class="icon" />
     <div class="info">
       <div class="text-1">
-        You showed interest in <span>Google Inc.</span>
+        {{ activity.message }}
       </div>
       <div class="text-2">
-        3 mins ago
+        {{ formatTime(activity.createdAt) }}
       </div>
     </div>
   </div>
@@ -14,7 +14,19 @@
 
 <script>
 export default {
-  name: 'ActivityLarge'
+  name: 'ActivityLarge',
+  props: {
+    activity: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    formatTime (dateString) {
+      const date = new Date(dateString)
+      return date.toLocaleTimeString()
+    }
+  }
 }
 </script>
 

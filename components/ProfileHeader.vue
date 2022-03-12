@@ -4,26 +4,30 @@
       <div class="cover-image" />
       <div class="cover-image-overlay" />
       <button class="clear-btn auto-wh">
-        <IconEditCover />
+        <IconEditCover @image="uploadImage($event, 'cover_photo')" />
       </button>
       <div class="profile-info">
         <div class="core-profile">
-          <div class="profile-image" />
+          <div class="profile-image" :style="user.avatar ? `background-image: url(${user.avatar})`: ''">
+            <button class="clear-btn">
+              <IconEditCover @image="uploadImage($event, 'avatar')" />
+            </button>
+          </div>
           <div class="core-info">
             <div class="name linkedin">
-              Favour Felix
+              {{ user.full_name }}
             </div>
             <div class="course">
-              BSc. Information Technology
+              {{ user.tagline }}
             </div>
           </div>
         </div>
         <div class="actions">
-          <nuxt-link v-if="$route.name === 'profile-edit'" to="/profile/edit" class="primary-btn green-bg">
-            <IconCheck class="icon" /> SAVE CHANGES
-          </nuxt-link>
+          <button v-if="$route.name === 'profile-edit'" class="primary-btn green-bg" @click="$nuxt.$emit('update-profile')">
+            <Loader v-if="$store.state.loading" class="icon" /> <IconCheck v-else class="icon" /> SAVE CHANGES
+          </button>
           <nuxt-link v-else to="/profile/edit" class="primary-btn">
-            <IconEdit class="icon" /> EDIT PROFILE
+            <Loader v-if="$store.state.loading" class="icon" /> <IconEdit v-else class="icon" /> EDIT PROFILE
           </nuxt-link>
         </div>
       </div>
@@ -49,8 +53,54 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'ProfileHeader'
+  name: 'ProfileHeader',
+  data () {
+    return {
+      avatar: null,
+      coverPhoto: null
+    }
+  },
+  computed: mapState({
+    user: state => state.auth.user
+  }),
+  created () {
+    this.getUser()
+    this.getUserActivity()
+  },
+  methods: {
+    async getUser () {
+      const user = await this.$axios.get(`/user/${this.$store.state.auth.user._id}`)
+      this.$store.commit('auth/setUser', user.data.data)
+    },
+    async getUserActivity () {
+      const activities = await this.$axios.get(`/user/activity/${this.$store.state.auth.user._id}`)
+      this.$store.commit('setActivities', activities.data.data)
+    },
+    async uploadImage (file, type) {
+      const fd = new FormData()
+      fd.append('file', file)
+      this.loading = type
+      const result = await this.$axios.post('/file', fd)
+      if (type === 'avatar') {
+        this.avatar = result.data.data.Location
+      } else {
+        this.coverPhoto = result.data.data.Location
+      }
+      this.updateUser(type)
+    },
+    async updateUser (type) {
+      const user = await this.$axios.put(`/user/${this.$store.state.auth.user._id}`, (type === 'avatar'
+        ? {
+            avatar: this.avatar
+          }
+        : {
+            cover_photo: this.coverPhoto
+          }))
+      this.$store.commit('auth/setUser', user.data.data)
+    }
+  }
 }
 </script>
 
@@ -75,7 +125,7 @@ export default {
     width: 100%;
     background: grey;
     border-radius: 24px;
-    background: url('~assets/images/school-bg.png') no-repeat center;
+    background: url('~assets/images/school-bg.jpeg') no-repeat center;
     background-size: cover;
   }
   .cover-image-overlay {
@@ -100,15 +150,23 @@ export default {
     margin-left: 16px;
   }
   .profile-image {
-    width: 150px;
+    min-width: 150px;
     height: 150px;
     border-radius: 50%;
     background: #cecece;
     border: 5px solid #FFFFFF;
     position: relative;
     top: -50px;
-    background: url('~assets/images/man.png') no-repeat;
+    background-image: url('~assets/images/person.png');
+    background-repeat: no-repeat;
     background-size: cover;
+  }
+  .profile-image .clear-btn {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    bottom: 10px;
+    right: 10px;
   }
   .actions {
     padding-right: 5%;
@@ -152,13 +210,14 @@ export default {
   .tab-group a {
     margin-right: 1.5rem;
     width: 110px;
+    max-width: 110px;
     background: #FFFFFF;
     color: var(--primary-dark);
   }
   .tab-group a.active, .tab-group a:hover {
-    margin-right: 1.5rem;
-    background: #FFFFFF;
     background: var(--primary-light);
     color: var(--primary-dark);
+    width: 110px;
+    max-width: 110px;
   }
 </style>

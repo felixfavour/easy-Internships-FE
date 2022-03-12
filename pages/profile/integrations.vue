@@ -27,9 +27,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ProfileIntegrations',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  computed: mapState({
+    user: state => state.auth.user
+  })
 }
 </script>
 

@@ -7,14 +7,18 @@
       </nuxt-link>
     </div>
     <div class="recent-activity">
-      <Activity v-for="index in 5" :key="index" />
+      <Activity v-for="activity in activities" :key="activity._id" :activity="activity" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'RecentActivity'
+  name: 'RecentActivity',
+  computed: mapState({
+    activities: state => state.activities
+  })
 }
 </script>
 

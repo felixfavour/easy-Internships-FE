@@ -13,7 +13,10 @@ export const mutations = ({
     state.token = value
   },
   setUser (state, value) {
-    state.user = value
+    const user = value
+    state.user = user
+    state.user.first_name = user.full_name?.split(' ')[0]
+    state.user.last_name = user.full_name.slice(user.full_name?.indexOf(' '))
   },
   setStudentSchool (state, value) {
     state.studentSchool = value

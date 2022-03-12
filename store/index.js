@@ -2,6 +2,7 @@ export const state = () => ({
   loading: false,
   error: null,
   success: null,
+  activities: [],
   currentQuestion: null,
   currentEmployer: null,
   sectors: ['Technology', 'Healthcare', 'Finance', 'Energy', 'Real Estate', 'Retail', 'Utilities', 'Agriculture', 'Other'],
@@ -18,6 +19,9 @@ export const mutations = ({
   },
   setCurrentQuestion (state, value) {
     state.currentQuestion = value
+  },
+  setActivities (state, value) {
+    state.activities = value
   }
 })
 

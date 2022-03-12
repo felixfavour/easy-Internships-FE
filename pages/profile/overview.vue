@@ -2,17 +2,16 @@
   <div class="page">
     <section class="about">
       <div class="header">
-        About Favour
+        About {{ user.full_name.split(' ')[0] }}
       </div>
       <p class="content">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur asperiores aspernatur esse sapiente ducimus alias repudiandae eligendi cumque temporibus voluptates, omnis a inventore dolorum pariatur, facilis provident perspiciatis vel odio beatae laboriosam exercitationem nostrum mollitia quaerat adipisci! Incidunt, ipsum fugit asperiores quod totam non assumenda. Modi maxime aperiam blanditiis maiores?
+        {{ user.bio || 'Hi there, please edit your profile and add a bio' }}
       </p>
     </section>
     <section class="about">
       <div class="content card-grid">
-        <InfoCard :info="{ label: 'CEO', value: 'Favour Felix' }" />
-        <InfoCard :info="{ label: 'Founded', value: '2021' }" />
-        <InfoCard :info="{ label: 'Business Sector', value: 'Technology' }" />
+        <InfoCard :info="{ label: 'Username', value: `@${user.username}` }" />
+        <InfoCard :info="{ label: 'School mail', value: user.email }" />
       </div>
     </section>
     <section class="about">
@@ -20,16 +19,21 @@
         School
       </div>
       <div class="content">
-        Middlesex University, Dubai
+        {{ school.full_name }}
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ProfileOverview',
-  layout: 'dashLayout'
+  layout: 'dashLayout',
+  computed: mapState({
+    user: state => state.auth.user,
+    school: state => state.auth.studentSchool
+  })
 }
 </script>
 
