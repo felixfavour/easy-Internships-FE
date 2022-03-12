@@ -1,6 +1,6 @@
 <template>
   <div class="modal-ctn">
-    <div class="modal new-skill">
+    <div ref="modal" class="modal new-skill come-down-sm">
       <div class="header">
         Add Skill
       </div>
@@ -87,5 +87,9 @@ export default {
     font-weight: 600;
     display: flex;
     justify-content: center;
+  }
+  .modal-down {
+    animation: modal-down .3s ease-in-out forwards;
+    -webkit-animation: modal-down .3s ease-in-out forwards;
   }
 </style>

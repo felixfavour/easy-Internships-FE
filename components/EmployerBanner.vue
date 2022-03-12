@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="actions come-up-2">
-        <button :class="['primary-btn', employer.user_interested ? 'following' : 'not-following']" @click="addInterest">
+        <button :class="['primary-btn', employerData.user_interested ? 'following' : 'not-following']" @click="addOrRemoveInterest">
           <Loader v-if="$store.state.loading" class="mr-6" />
           <span v-else class="icon reveals plus-icon">+</span>
           <IconCheck class="icon reveals check-icon" />I'm Interested
@@ -33,14 +33,23 @@ export default {
       default: () => {}
     }
   },
+  data () {
+    return {
+      employerData: { ...this.employer }
+    }
+  },
   methods: {
-    async addInterest () {
-      await this.$axios.post('/interest/add', {
-        interested_user_id: this.$store.state.auth.user._id,
-        interested_user_type: this.$store.state.auth.user.type,
-        interesting_user_id: this.employer.user._id,
-        interesting_user_type: this.employer.user.type
-      })
+    async addOrRemoveInterest () {
+      if (this.employerData.user_interested) {
+        this.$toasted.error('You are already interested in this employer')
+      } else {
+        await this.$axios.post('/interest/add', {
+          interested_user_id: this.$store.state.auth.user._id,
+          interested_user_type: this.$store.state.auth.user.type,
+          interesting_user_id: this.employer.user._id,
+          interesting_user_type: this.employer.user.type
+        })
+      }
     }
   }
 }

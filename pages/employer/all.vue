@@ -1,24 +1,27 @@
 <template>
   <div class="employers-ctn section page">
-    <div class="inner">
-      <div class="employers-header">
-        <SearchInput class="outlined" @search="searchEmployers($event); searchQuery = $event" />
-        <button :class="{ 'clear-btn filter-btn': true, 'active': filterMode }" @click="filterMode = !filterMode">
-          <IconFilter v-if="!filterMode" class="come-down-sm" />
-          <IconCloseNoCircle v-if="filterMode" class="come-down-sm" />
-          <span v-show="!filterMode" class="come-down-sm">Filter Results</span>
-          <span v-show="filterMode" class="come-down-sm">Clear Filters</span>
-        </button>
-      </div>
-      <EmployeeFilter :class="filterMode ? 'expand' : 'contract'" @filter="filterBy = $event; filterEmployers()" />
-      <div v-if="searchQuery !== ''" class="results-header come-down-sm">
-        Companies for "{{ searchQuery }}"
-      </div>
-      <div v-if="!filterMode" class="card-grid">
-        <EmployerCard v-for="employer in employers" :key="employer._id" :employer="employer" />
-      </div>
-      <div v-else class="card-grid">
-        <EmployerCard v-for="employer in filteredEmployers" :key="employer._id" :employer="employer" />
+    <LargeLoader v-if="$store.state.loading" />
+    <div v-else class="inner">
+      <div>
+        <div class="employers-header">
+          <SearchInput class="outlined" @search="searchEmployers($event); searchQuery = $event" />
+          <button :class="{ 'clear-btn filter-btn': true, 'active': filterMode }" @click="filterMode = !filterMode">
+            <IconFilter v-if="!filterMode" class="come-down-sm" />
+            <IconCloseNoCircle v-if="filterMode" class="come-down-sm" />
+            <span v-show="!filterMode" class="come-down-sm">Filter Results</span>
+            <span v-show="filterMode" class="come-down-sm">Clear Filters</span>
+          </button>
+        </div>
+        <EmployeeFilter :class="filterMode ? 'expand' : 'contract'" @filter="filterBy = $event; filterEmployers()" />
+        <div v-if="searchQuery !== ''" class="results-header come-down-sm">
+          Companies for "{{ searchQuery }}"
+        </div>
+        <div v-if="!filterMode" class="card-grid">
+          <EmployerCard v-for="employer in employers" :key="employer._id" :employer="employer" />
+        </div>
+        <div v-else class="card-grid">
+          <EmployerCard v-for="employer in filteredEmployers" :key="employer._id" :employer="employer" />
+        </div>
       </div>
     </div>
   </div>

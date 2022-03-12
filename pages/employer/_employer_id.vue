@@ -37,6 +37,7 @@
       :roles="roles"
       :questions="questions"
       :answers="answers"
+      :employer-answers="employerAnswers"
     />
   </div>
 </template>
@@ -53,6 +54,7 @@ export default {
       roles: [],
       questions: [],
       answers: [],
+      employerAnswers: [],
       loading: 'all'
     }
   },
@@ -62,6 +64,7 @@ export default {
         this.getAnswers()
       } else {
         this.answers = []
+        this.employerAnswers = []
       }
     }
   },
@@ -72,6 +75,22 @@ export default {
     this.getSalaries()
     this.getQuestions()
     this.getAnswers()
+  },
+  mounted () {
+    // REFRESH DATA
+    this.$nuxt.$on('refresh-employer', (type) => {
+      switch (type) {
+        case 'QUESTION-ASK':
+          this.getQuestions()
+          break
+        case 'QUESTION-ANSWER':
+          this.getAnswers()
+          break
+        case 'EMPLOYER':
+          this.getEmployer()
+          break
+      }
+    })
   },
   methods: {
     async getEmployer () {
@@ -93,14 +112,15 @@ export default {
     },
     async getQuestions () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/question`)
-      this.questions = reviews.data.data
+      this.questions = reviews.data.data.reverse()
     },
     async getAnswers () {
       const answers = await this.$axios.get(`/employer/question/${this.$route.params.question_id}/answer`)
       answers.data.data.sort((a, b) => {
         return a.user_id > b.user_id ? 1 : -1
       })
-      this.answers = answers.data.data
+      this.employerAnswers = [...answers.data.data].slice(0, 1)
+      this.answers = [...answers.data.data].slice(1).reverse()
     }
   }
 }

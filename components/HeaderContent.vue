@@ -39,7 +39,7 @@
       <span class="seperator">
         >
       </span>
-      Google Inc.
+      {{ $route.query.name || 'Employer' }}
     </span>
     <span v-else-if="$route.name === 'settings-security'" class="not-middle">
       Security Settings
@@ -49,6 +49,11 @@
     </span>
   </div>
 </template>
+
+<script>
+export default {}
+</script>
+
 <style scoped>
   a {
     font-size: 1rem;

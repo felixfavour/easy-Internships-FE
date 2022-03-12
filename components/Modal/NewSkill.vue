@@ -1,9 +1,9 @@
 <template>
   <div class="modal-ctn">
-    <div class="modal new-skill">
+    <div ref="modal" class="modal side-modal-up new-skill">
       <div class="header">
         Create a New Skill
-        <button class="clear-btn" @click="$emit('close-modal')">
+        <button class="clear-btn" @click="closeModal">
           <IconClose />
         </button>
       </div>
@@ -47,6 +47,13 @@ export default {
     }
   },
   methods: {
+    closeModal () {
+      this.$refs.modal.classList.remove('side-modal-up')
+      this.$refs.modal.classList.add('side-modal-down')
+      window.setTimeout(() => {
+        this.$emit('close-modal')
+      }, 600)
+    },
     async uploadImage (file) {
       const fd = new FormData()
       fd.append('file', file)
@@ -117,5 +124,71 @@ export default {
   }
   .message {
     text-align: center;
+  }
+
+  .side-modal-up {
+    animation: side-modal-up .6s ease-in-out forwards;
+    -webkit-animation: side-modal-up .6s ease-in-out forwards;
+  }
+  .side-modal-down {
+    animation: side-modal-down .6s ease-in-out forwards;
+    -webkit-animation: side-modal-down .6s ease-in-out forwards;
+  }
+
+  @keyframes modal-down {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+  }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+      -webkit-transform: translateY(20px);
+      -moz-transform: translateY(20px);
+      -ms-transform: translateY(20px);
+      -o-transform: translateY(20px);
+  }
+  }
+
+  @keyframes side-modal-up {
+    0% {
+      opacity: 0;
+      transform: translateX(700px);
+      -webkit-transform: translateX(700px);
+      -moz-transform: translateX(700px);
+      -ms-transform: translateX(700px);
+      -o-transform: translateX(700px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0vw);
+      -webkit-transform: translateX(0vw);
+      -moz-transform: translateX(0vw);
+      -ms-transform: translateX(0vw);
+      -o-transform: translateX(0vw);
+    }
+  }
+
+  @keyframes side-modal-down {
+    0% {
+      opacity: 1;
+      transform: translateX(0vw);
+      -webkit-transform: translateX(0vw);
+      -moz-transform: translateX(0vw);
+      -ms-transform: translateX(0vw);
+      -o-transform: translateX(0vw);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(700px);
+      -webkit-transform: translateX(700px);
+      -moz-transform: translateX(700px);
+      -ms-transform: translateX(700px);
+      -o-transform: translateX(700px);
+  }
   }
 </style>

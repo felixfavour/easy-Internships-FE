@@ -32,6 +32,7 @@ export default {
   methods: {
     async removeInterest () {
       await this.$axios.delete(`/interest/remove/${this.interest._id}`)
+      this.$emit('refresh')
     }
   }
 }

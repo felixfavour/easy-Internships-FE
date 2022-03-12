@@ -64,7 +64,7 @@ export default {
         answers: 0,
         answered: false
       })
-      this.$nuxt.refresh()
+      this.$nuxt.$emit('refresh-employer', 'QUESTION-ASK')
     }
   }
 }

@@ -11,6 +11,7 @@
             Answers ({{ answers.length }})
           </div>
           <div class="reviews-list">
+            <AnswerCard v-for="answer in employerAnswers" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
             <AnswerCard v-for="answer in answers" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
           </div>
         </section>
@@ -40,6 +41,10 @@ export default {
   name: 'EmployerDetails',
   layout: 'dashLayout',
   props: {
+    employerAnswers: {
+      type: Array,
+      default: () => []
+    },
     answers: {
       type: Array,
       default: () => []
@@ -65,6 +70,7 @@ export default {
         votes: 0,
         user_voted: false
       })
+      this.$nuxt.$emit('refresh-employer', 'QUESTION-ANSWER')
     }
   }
 }
