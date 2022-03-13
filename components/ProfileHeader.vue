@@ -159,8 +159,9 @@ export default {
     position: relative;
     top: -50px;
     background-image: url('~assets/images/person.png');
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
   }
   .profile-image .clear-btn {
     position: absolute;

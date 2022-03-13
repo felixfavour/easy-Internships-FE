@@ -3,23 +3,23 @@
     <div class="sidebar-header">
       <div class="logo">
         <img src="~assets/images/Ei-logo-inverse.png" alt="">
-        <span>School</span>
+        <span>Universities</span>
       </div>
     </div>
     <ul class="actions">
       <li>
-        <nuxt-link to="/employer/popular" :class="{ 'active': $route.name.includes('employer') }">
+        <nuxt-link to="/students" :class="{ 'active': $route.name.includes('student') }">
           <IconEmployers />
-          <span>Employers</span>
+          <span>Students</span>
         </nuxt-link>
       </li>
       <li>
         <nuxt-link to="/performance" :class="{ 'active': $route.name.includes('performance') }">
           <IconPerformance />
-          <span>Performance</span>
+          <span>Statistics</span>
         </nuxt-link>
       </li>
-      <li>
+      <!-- <li>
         <nuxt-link to="/interests/me" :class="{ 'active': $route.name.includes('interests-me') }">
           <IconInterests />
           <span>My Interests</span>
@@ -30,11 +30,11 @@
           <IconSkills />
           <span>My Skills</span>
         </nuxt-link>
-      </li>
+      </li> -->
       <li>
         <nuxt-link to="/profile/overview" :class="{ 'active': $route.name.includes('profile') }">
           <IconProfile />
-          <span>My Profile</span>
+          <span>School Profile</span>
         </nuxt-link>
       </li>
     </ul>

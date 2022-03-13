@@ -1,22 +1,20 @@
 <template>
-  <LargeLoader v-if="$store.state.loading && user === undefined" />
-  <div v-else-if="user !== undefined" class="login-ctn">
+  <!-- <LargeLoader v-if="$store.state.loading && user === undefined" /> -->
+  <div class="login-ctn">
     <div class="header">
       <div class="logos">
-        <div class="uni-logo bg-img reveals" :style="`background-image: url(${user.icon})`" />
-        +
         <div class="ei-logo bg-img reveals" />
       </div>
       <div class="large-text">
         <LargeLogo />
-        <div>for {{ user.full_name }}</div>
+        <div>for Universities </div>
       </div>
     </div>
     <form @submit.prevent="">
       <div class="form-group">
         <input v-model="email" type="email">
         <label for="email">
-          University Email
+          Administrator Email
         </label>
       </div>
       <div class="form-group">
@@ -50,24 +48,17 @@ export default {
     }
   },
   created () {
-    this.findUserByUsername()
   },
   methods: {
-    async findUserByUsername () {
-      const user = await this.$axios.get(`/user/username/${this.$route.params.user}`)
-      this.user = user.data.data
-      this.$store.commit('auth/setStudentSchool', this.user)
-    },
     async login () {
       const res = await this.$axios.post('/auth/login', {
         email: this.email,
-        password: this.password,
-        school_id: this.user.school._id
+        password: this.password
       })
       this.$toasted.success('Login successful')
       this.$store.commit('auth/setToken', res.data.data.token)
       this.$store.commit('auth/setUser', res.data.data.user)
-      this.$router.push('/employer/popular')
+      this.$router.push('/students')
     }
   }
 }

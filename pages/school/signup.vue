@@ -114,7 +114,7 @@
       </button>
       <div class="login-text">
         <span>Already have an account?</span>
-        <nuxt-link to="/middlesex/login">
+        <nuxt-link to="/login">
           Log In
         </nuxt-link>
       </div>

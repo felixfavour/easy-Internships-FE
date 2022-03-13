@@ -75,7 +75,7 @@ export default {
       ]
       const date = new Date(dateString)
       const month = months[date.getMonth()]
-      return `${month} ${date.getDay()}, ${date.getFullYear()}`
+      return `${month} ${date.getDate()}, ${date.getFullYear()}`
     },
     async voteAnswer (type) {
       await this.$axios.post(`/employer/answer/${this.answer._id}/vote`, {

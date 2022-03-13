@@ -11,7 +11,7 @@
           <span class="name">
             {{ user.first_name }}
           </span>
-          <img :src="user.avatar" alt="">
+          <img :src="user.type === 'student' ? user.avatar : user.icon" alt="">
         </nuxt-link>
         <nuxt-link v-else to="/profile/overview" class="profile">
           <img src="~assets/images/person.png" alt="">
@@ -75,6 +75,7 @@ export default {
   a > img {
     width: 45px;
     height: 45px;
+    padding: 4px;
     border-radius: 50%;
     margin-left: 1rem;
     border: 3px solid var(--primary);

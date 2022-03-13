@@ -8,10 +8,11 @@
       <div class="text-2">
         {{ data.head }}
       </div>
-      <nuxt-link v-if="data.hasSearch" to="/employer/all" class="primary-btn">
-        See All Employers
-      </nuxt-link>
+      <button v-if="data.hasSearch" class="primary-btn" @click="modal = true">
+        Enrol Student
+      </button>
     </div>
+    <ModalNewStudent v-if="modal" @close-modal="modal = false" />
   </div>
 </template>
 
@@ -22,6 +23,11 @@ export default {
     data: {
       type: Object,
       default: () => {}
+    }
+  },
+  data () {
+    return {
+      modal: false
     }
   }
 }
