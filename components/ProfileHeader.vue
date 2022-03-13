@@ -16,7 +16,7 @@
           <div class="core-info">
             <div class="name">
               {{ user.full_name }}
-              <a v-if="user.linkedin" class="linkedin" :href="user.linkedin" />
+              <a v-if="user.linkedin" target="_blank" class="linkedin" :href="user.linkedin" />
             </div>
             <div class="course">
               {{ user.tagline }}

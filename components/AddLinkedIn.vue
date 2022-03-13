@@ -10,18 +10,24 @@
     <div class="text-4">
       Give employers access to your full-fledged LinkedIn profile.
     </div>
-    <button class="primary-btn">
+    <button class="primary-btn" @click="modalOpen = true">
       START HERE
     </button>
     <div class="text-5">
       It only takes 30 seconds.
     </div>
+    <ModalAddLinkedIn v-if="modalOpen" @close-modal="modalOpen = false" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AddLinkedIn'
+  name: 'AddLinkedIn',
+  data () {
+    return {
+      modalOpen: false
+    }
+  }
 }
 </script>
 

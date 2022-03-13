@@ -8,16 +8,20 @@
       </div>
       <div class="col-2">
         <RecentActivity v-if="$route.name !== 'profile-activity'" />
-        <AddLinkedIn />
+        <AddLinkedIn v-if="!user.linkedin" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ProfileLayout',
   layout: 'dashLayout',
+  computed: mapState({
+    user: state => state.auth.user
+  }),
   mounted () {
     // RECORD USER VISIT
     // const user = this.$store.state.auth.user
