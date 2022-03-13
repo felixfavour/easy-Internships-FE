@@ -77,6 +77,6 @@ export default {
     height: 45px;
     border-radius: 50%;
     margin-left: 1rem;
-    border: 3px solid #007BEC;
+    border: 3px solid var(--primary);
   }
 </style>

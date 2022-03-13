@@ -3,7 +3,7 @@
     <div class="sidebar-header">
       <div class="logo">
         <img src="~assets/images/Ei-logo-inverse.png" alt="">
-        <span>Students</span>
+        <span>School</span>
       </div>
     </div>
     <ul class="actions">
