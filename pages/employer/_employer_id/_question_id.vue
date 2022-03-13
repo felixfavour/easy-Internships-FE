@@ -12,8 +12,8 @@
             Answers ({{ answers.length }})
           </div>
           <div class="reviews-list">
-            <AnswerCard v-for="answer in employerAnswers" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
-            <AnswerCard v-for="answer in answers" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
+            <AnswerCard v-for="answer in employerAnswersData" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
+            <AnswerCard v-for="answer in answersData" :key="answer._id" :answer="answer" :original="answer.user_id === $route.params.employer_id" />
           </div>
         </section>
         <section id="answer">
@@ -27,7 +27,7 @@
             <textarea v-model="answerContent" placeholder="I want to know..." />
             <button :disabled="!(answerContent !== '')" class="primary-btn come-down-sm" @click="addAnswer">
               Answer
-              <Loader v-if="$store.state.loading" class="mr-6" />
+              <Loader v-if="answerSending" class="mr-6" />
               <IconSend v-else class="btn-icon" />
             </button>
           </div>
@@ -54,13 +54,20 @@ export default {
   data () {
     return {
       question: this.$store.state.currentQuestion,
+      answersData: this.answers,
+      employerAnswersData: this.employerAnswers,
       answerContent: '',
       count: 0,
-      questionLoading: false
+      questionLoading: false,
+      answerSending: false
     }
   },
   created () {
     this.getQuestion()
+    const app = this
+    this.$nuxt.$on('refresh-answers', () => {
+      app.getAnswers()
+    })
   },
   methods: {
     async getQuestion () {
@@ -70,6 +77,7 @@ export default {
       this.questionLoading = false
     },
     async addAnswer () {
+      this.answerSending = true
       await this.$axios.post('/employer/answer', {
         user_id: this.$store.state.auth.user._id,
         user_name: this.$store.state.auth.user.full_name,
@@ -81,7 +89,16 @@ export default {
         votes: 0,
         user_voted: false
       })
+      this.answerSending = false
       this.$nuxt.$emit('refresh-employer', 'QUESTION-ANSWER')
+    },
+    async getAnswers () {
+      const answers = await this.$axios.get(`/employer/question/${this.$route.params.question_id}/answer`)
+      answers.data.data.sort((a, b) => {
+        return a.user_id > b.user_id ? 1 : -1
+      })
+      this.employerAnswersData = [...answers.data.data].slice(0, 1)
+      this.answersData = [...answers.data.data].slice(1).reverse()
     }
   }
 }

@@ -1,16 +1,22 @@
 <template>
   <div :class="['question-card', original ? 'bordered' : '']">
     <div v-if="!original" class="votes">
-      <button class="clear-btn">
-        <IconUpvote :filled="true" />
-        <!-- <IconUpvote /> -->
+      <button
+        :disabled="voted === 'upvote' || answer.user_voted === 'upvote'"
+        class="clear-btn"
+        @click="voteAnswer('upvote')"
+      >
+        <IconUpvote :filled="voted || answer.user_voted === 'upvote'" />
       </button>
       <span>
-        {{ answer.votes }}
+        {{ voteCount || answer.votes }}
       </span>
-      <button class="clear-btn">
-        <!-- <IconDownvote :filled="true" /> -->
-        <IconDownvote />
+      <button
+        :disabled="voted === 'downvote' || answer.user_voted === 'downvote'"
+        class="clear-btn"
+        @click="voteAnswer('downvote')"
+      >
+        <IconDownvote :filled="voted || answer.user_voted === 'downvote'" />
       </button>
     </div>
     <div class="main">
@@ -45,6 +51,12 @@ export default {
       default: () => false
     }
   },
+  data () {
+    return {
+      voted: null,
+      voteCount: null
+    }
+  },
   methods: {
     formatDate (dateString) {
       const months = [
@@ -64,6 +76,14 @@ export default {
       const date = new Date(dateString)
       const month = months[date.getMonth()]
       return `${month} ${date.getDay()}, ${date.getFullYear()}`
+    },
+    async voteAnswer (type) {
+      await this.$axios.post(`/employer/answer/${this.answer._id}/vote`, {
+        user_id: this.$store.state.auth.user._id,
+        type
+      })
+      this.$emit('refresh')
+      this.$nuxt.$emit('refresh-answers')
     }
   }
 }
