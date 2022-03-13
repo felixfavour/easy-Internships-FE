@@ -6,10 +6,10 @@
         <ProfileHeader />
         <NuxtChild />
       </div>
-      <!-- <div class="col-2">
+      <div class="col-2">
         <RecentActivity v-if="$route.name !== 'profile-activity'" />
         <AddLinkedIn v-if="!user.linkedin" />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
     justify-content: space-between;
   }
   .col-1 {
-    flex-basis: 100%;
+    flex-basis: calc(100% - 400px);
   }
   .col-2 {
     width: 350px;

@@ -40,12 +40,12 @@
       <nuxt-link to="/profile/edit" :class="['primary-btn', ($route.name.includes('edit') ? 'active' : '')]">
         Edit Profile
       </nuxt-link>
-      <nuxt-link to="/profile/integrations" :class="['primary-btn', ($route.name.includes('integrations') ? 'active' : '')]">
+      <!-- <nuxt-link to="/profile/integrations" :class="['primary-btn', ($route.name.includes('integrations') ? 'active' : '')]">
         Integrations
       </nuxt-link>
       <nuxt-link to="/profile/activity" :class="['primary-btn', ($route.name.includes('activity') ? 'active' : '')]">
         Activity
-      </nuxt-link>
+      </nuxt-link> -->
       <nuxt-link to="/profile/security" :class="['primary-btn', ($route.name.includes('security') ? 'active' : '')]">
         Security
       </nuxt-link>
