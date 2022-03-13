@@ -91,8 +91,22 @@ export default {
           break
       }
     })
+
+    // RECORD USER VISIT
+    const user = this.$store.state.auth.user
+    this.addVisit(user)
   },
   methods: {
+    async addVisit (user) {
+      // Only add user visit when user viewing is not user logged in.
+      if (user?._id !== this.employer.user_id) {
+        await this.$axios.post('/user/visit', {
+          user_id: this.$store.state.auth.user._id,
+          visited_user: this.employer.user_id,
+          visited_user_type: 'employer'
+        })
+      }
+    },
     async getEmployer () {
       const employer = await this.$axios.get(`/employer/${this.$route.params.employer_id}`)
       this.employer = employer.data.data
