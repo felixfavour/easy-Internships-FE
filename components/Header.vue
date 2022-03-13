@@ -65,7 +65,7 @@ export default {
     align-items: center;
   }
   .name {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: 600;
     margin-left: 8px;
   }

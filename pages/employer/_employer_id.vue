@@ -1,7 +1,7 @@
 <template>
   <!-- THIS IS A LAYOUT-PAGE WITH NESTED PAGES -->
-  <LargeLoader v-if="$store.state.loading" class="mt-half" />
-  <div v-else class="employer-layout">
+  <!-- <LargeLoader v-if="$store.state.loading" class="mt-half" /> -->
+  <div class="employer-layout">
     <section v-if="!$route.name.includes('question_id')">
       <EmployerBanner
         v-if="employer.user"

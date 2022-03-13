@@ -2,7 +2,8 @@
   <!-- THIS IS A LAYOUT-PAGE WITH NESTED PAGES -->
   <div v-if="question !== null" class="employer-layout">
     <div class="question-banner">
-      <QuestionCard :question="question" :question-page="true" />
+      <!-- <LargeLoader v-if="questionLoading" /> -->
+      <QuestionCard :question="question" :question-page="true" @refresh="getQuestion" />
     </div>
     <div class="section">
       <div class="inner">
@@ -54,10 +55,20 @@ export default {
     return {
       question: this.$store.state.currentQuestion,
       answerContent: '',
-      count: 0
+      count: 0,
+      questionLoading: false
     }
   },
+  created () {
+    this.getQuestion()
+  },
   methods: {
+    async getQuestion () {
+      this.questionLoading = true
+      const question = await this.$axios.get(`/employer/question/${this.$route.params.question_id}`)
+      this.question = question.data.data
+      this.questionLoading = false
+    },
     async addAnswer () {
       await this.$axios.post('/employer/answer', {
         user_id: this.$store.state.auth.user._id,

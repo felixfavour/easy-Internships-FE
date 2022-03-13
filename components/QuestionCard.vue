@@ -1,17 +1,26 @@
 <template>
   <div class="question-card">
-    <div class="votes">
-      <button class="clear-btn">
-        <IconUpvote :filled="true" />
-        <!-- <IconUpvote /> -->
+    <div v-if="$route.name.includes('question_id')" class="votes">
+      <button
+        :disabled="voted === 'upvote' || question.user_voted === 'upvote'"
+        class="clear-btn"
+        @click="voteQuestion('upvote')"
+      >
+        <IconUpvote :filled="voted || question.user_voted === 'upvote'" />
       </button>
       <span>
-        {{ question.votes }}
+        {{ voteCount || question.votes }}
       </span>
-      <button class="clear-btn">
-        <!-- <IconDownvote :filled="true" /> -->
-        <IconDownvote />
+      <button
+        :disabled="voted === 'downvote' || question.user_voted === 'downvote'"
+        class="clear-btn"
+        @click="voteQuestion('downvote')"
+      >
+        <IconDownvote :filled="voted || question.user_voted === 'downvote'" />
       </button>
+    </div>
+    <div v-else class="votes">
+      {{ question.votes }} <br> votes
     </div>
     <div class="main">
       <div class="row row-1">
@@ -62,6 +71,12 @@ export default {
       default: () => false
     }
   },
+  data () {
+    return {
+      voted: null,
+      voteCount: null
+    }
+  },
   methods: {
     formatDate (dateString) {
       const months = [
@@ -81,12 +96,23 @@ export default {
       const date = new Date(dateString)
       const month = months[date.getMonth()]
       return `${month} ${date.getDay()}, ${date.getFullYear()}`
+    },
+    async voteQuestion (type) {
+      await this.$axios.post(`/employer/question/${this.$route.params.question_id}/vote`, {
+        user_id: this.$store.state.auth.user._id,
+        type
+      })
+      this.$emit('refresh')
+      this.$nuxt.$emit('refresh-employer', 'QUESTION-ASK')
     }
   }
 }
 </script>
 
 <style scoped>
+  button:disabled {
+    cursor: not-allowed;
+  }
   .clear-btn {
     height: 35px;
     min-width: 45px;
@@ -106,9 +132,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     font-weight: 600;
-    font-size: 1.2rem;
-    color: #007BEC;
+    font-size: 0.95rem;
+    color: #000000;
   }
   .row-1 {
     display: flex;
