@@ -91,10 +91,6 @@ export default {
           break
       }
     })
-
-    // RECORD USER VISIT
-    const user = this.$store.state.auth.user
-    this.addVisit(user)
   },
   methods: {
     async addVisit (user) {
@@ -111,6 +107,10 @@ export default {
       const employer = await this.$axios.get(`/employer/${this.$route.params.employer_id}`)
       this.employer = employer.data.data
       this.loading = ''
+
+      // RECORD USER VISIT
+      const user = this.$store.state.auth.user
+      this.addVisit(user)
     },
     async getReviews () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/review`)
