@@ -7,7 +7,7 @@
       </div>
       <div class="large-text">
         <LargeLogo />
-        <div>for Universities </div>
+        <div>for Employers </div>
       </div>
     </div>
     <form @submit.prevent="">
