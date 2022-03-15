@@ -22,6 +22,9 @@
     <span v-else-if="$route.name === 'profile-edit'" class="not-middle">
       Edit Profile
     </span>
+    <span v-else-if="$route.name === 'students-user_id'" class="not-middle">
+      Student Profile
+    </span>
     <span v-else-if="$route.name === 'profile-integrations'" class="not-middle">
       My Integrations
     </span>

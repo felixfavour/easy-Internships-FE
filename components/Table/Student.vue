@@ -17,11 +17,11 @@
           <th>
             Username
           </th>
-          <th>
+          <!-- <th>
             Date Enrolled
-          </th>
+          </th> -->
           <th>
-            <!-- Action -->
+            Action
           </th>
         </tr>
         <tr v-for="student in data" :key="student._id" class="content-row" @click="$router.push('#')">
@@ -37,13 +37,13 @@
           <td>
             {{ student.username }}
           </td>
-          <td class="bold">
+          <!-- <td class="bold">
             {{ formatDate(student.createdAt) }}
-          </td>
+          </td> -->
           <td>
-            <!-- <nuxt-link :to="`/profile/${student._id}`">
+            <nuxt-link :to="`/students/${student._id}`">
               <span class="material-icons">See Student</span>
-            </nuxt-link> -->
+            </nuxt-link>
           </td>
         </tr>
       </table>
@@ -69,7 +69,7 @@ export default {
   methods: {
     async getStudents () {
       this.isLoading = true
-      const students = await this.$axios.get(`/user/school/${this.$store.state.auth.user._id}`)
+      const students = await this.$axios.get('/user/student')
       this.data = students.data.data.reverse()
       this.isLoading = false
     },
@@ -155,7 +155,7 @@ th {
   height: 70px;
   text-transform: capitalize;
   color: #000000;
-  opacity: 0.4;
+  opacity: 1;
   text-align: left;
 }
 td {

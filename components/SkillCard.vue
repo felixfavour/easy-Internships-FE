@@ -9,23 +9,6 @@
         {{ skill.name }}
       </div>
     </div>
-    <div class="row-2">
-      <div class="people">
-        <div v-for="user in skill.users" :key="user._id" class="person" :style="user.user_avatar ? `background-image: url(${user.user_avatar})`: ''" />
-        <div v-if="skill.total_users > 3" class="last person">
-          +{{ skill.total_users - 3 }}
-        </div>
-      </div>
-      <div class="action">
-        <button v-if="mySkill" class="primary-btn danger" @click="removeSkill">
-          <Loader v-if="$store.state.loading" class="mr-6" />
-          REMOVE SKILL
-        </button>
-        <button v-else class="primary-btn" @click="addSkillDialog = true">
-          + ADD SKILL
-        </button>
-      </div>
-    </div>
     <DialogAddSkill
       v-if="addSkillDialog"
       :skill="skill"
@@ -43,6 +26,10 @@ export default {
       default: () => {}
     },
     mySkill: {
+      type: String,
+      default: () => null
+    },
+    userSkill: {
       type: String,
       default: () => null
     }
@@ -83,14 +70,14 @@ export default {
     position: relative;
     background: #cecece no-repeat;
     background-size: cover;
-    border-radius: 8px 8px 0 0;
+    border-radius: 8px;
   }
   .skill-name {
     font-weight: 600;
     font-size: 1.3rem;
     position: absolute;
-    bottom: 12px;
-    left: 12px;
+    bottom: 16px;
+    left: 16px;
     color: #FFFFFF;
   }
   .popular {
@@ -108,7 +95,7 @@ export default {
     inset: 0;
     position: absolute;
     background: #00000070;
-    border-radius: 8px 8px 0 0;
+    border-radius: 8px;
   }
   .row-2 {
     padding: 18px 12px;

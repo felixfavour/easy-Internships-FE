@@ -6,15 +6,14 @@
         <div class="name">
           {{ interest.user[0].full_name }}
         </div>
-        <IconStarRating :rating="interest.employer[0].rating" />
       </div>
     </div>
     <div class="row row-3 actions">
       <button class="primary-btn outlined" @click="removeInterest">
         <span>Remove</span>
       </button>
-      <nuxt-link class="primary-btn" :to="`/employer/${interest.employer[0]._id}/about`">
-        See More
+      <nuxt-link class="primary-btn" :to="`/students/${interest.interesting_user_id}`">
+        See Student
       </nuxt-link>
     </div>
   </div>

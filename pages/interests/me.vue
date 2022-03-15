@@ -13,7 +13,7 @@
         <div v-else-if="interests.length > 0 && !$store.state.loading" class="card-grid">
           <InterestCard v-for="interest in interests" :key="interest._id" :interest="interest" @refresh="getMyInterests()" />
         </div>
-        <EmptyState v-else text="You have made no interests in employers." />
+        <EmptyState v-else text="You have made no interests in students." />
       </div>
     </div>
   </div>

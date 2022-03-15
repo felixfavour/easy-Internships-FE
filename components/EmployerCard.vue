@@ -73,7 +73,7 @@ export default {
         interested_user_id: this.$store.state.auth.user._id,
         interested_user_type: this.$store.state.auth.user.type,
         interesting_user_id: this.employer.user[0]._id,
-        interesting_user_type: this.employer.user[0].student
+        interesting_user_type: this.employer.user[0].type
       })
       this.interested = true
     },
