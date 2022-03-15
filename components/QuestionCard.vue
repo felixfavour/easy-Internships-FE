@@ -29,7 +29,10 @@
             {{ question.title }}
           </div>
           <div class="text-sub">
-            asked on {{ formatDate(question.createdAt) }}
+            asked on {{ formatDate(question.createdAt) }} by
+            <nuxt-link class="link" :to="`/students/${question.user_id}`">
+              Student
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -38,7 +41,7 @@
       </p>
       <div v-if="!questionPage" class="row row-3">
         <nuxt-link
-          :to="`/employer/${$route.params.employer_id}/${question._id}#answer`"
+          :to="`/questions/${question._id}#answer`"
           class="primary-btn"
           @click.native="$store.commit('setCurrentQuestion', question)"
         >
@@ -46,7 +49,7 @@
         </nuxt-link>
         <nuxt-link
           v-if="!$route.name.includes('question_id') && question.answers > 0"
-          :to="`/employer/${$route.params.employer_id}/${question._id}`"
+          :to="`/questions/${question._id}`"
           class="primary-btn outlined"
           @click.native="$store.commit('setCurrentQuestion', question)"
         >
@@ -110,6 +113,10 @@ export default {
 </script>
 
 <style scoped>
+  .link {
+    text-decoration: underline;
+    color: var(--primary);
+  }
   button:disabled {
     cursor: not-allowed;
   }

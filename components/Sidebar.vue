@@ -9,8 +9,14 @@
     <ul class="actions">
       <li>
         <nuxt-link to="/students" :class="{ 'active': $route.name.includes('student') }">
-          <IconEmployers />
+          <IconStudent />
           <span>Students</span>
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/questions" :class="{ 'active': $route.name.includes('questions') }">
+          <IconQuestion />
+          <span>Questions</span>
         </nuxt-link>
       </li>
       <li>
@@ -54,7 +60,7 @@ export default {
   name: 'Sidebar',
   methods: {
     logOut () {
-      this.$router.push(`/${this.$store.state.auth.studentSchool.username}/login`)
+      this.$router.push('/login')
       this.$store.commit('auth/logOut')
     }
   }

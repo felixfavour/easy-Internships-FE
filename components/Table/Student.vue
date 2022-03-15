@@ -1,7 +1,7 @@
 <template>
   <div class="extra-out">
     <div class="table-outer">
-      <LargeLoader v-show="isLoading" />
+      <!-- <LargeLoader v-show="isLoading" /> -->
       <EmptyState v-show="!isLoading && (data.length === 0)" text="You have not enrolled any student" />
       <table v-show="data.length > 0" class="table-ctn">
         <tr>

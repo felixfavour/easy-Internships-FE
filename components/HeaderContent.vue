@@ -25,6 +25,9 @@
     <span v-else-if="$route.name === 'students-user_id'" class="not-middle">
       Student Profile
     </span>
+    <span v-else-if="$route.name === 'questions-question_id'" class="not-middle">
+      Question' Answers
+    </span>
     <span v-else-if="$route.name === 'profile-integrations'" class="not-middle">
       My Integrations
     </span>

@@ -53,7 +53,7 @@ export default {
   },
   data () {
     return {
-      question: this.$store.state.currentQuestion,
+      question: {},
       answersData: this.answers,
       employerAnswersData: this.employerAnswers,
       answerContent: '',
@@ -64,6 +64,7 @@ export default {
   },
   created () {
     this.getQuestion()
+    this.getAnswers()
     const app = this
     this.$nuxt.$on('refresh-answers', () => {
       app.getAnswers()
@@ -79,18 +80,18 @@ export default {
     async addAnswer () {
       this.answerSending = true
       await this.$axios.post('/employer/answer', {
-        user_id: this.$store.state.auth.user._id,
+        user_id: this.$store.state.auth.user.employer_id,
         user_name: this.$store.state.auth.user.full_name,
-        user_tagline: this.$store.state.auth.user.tagline || '',
+        user_tagline: this.$store.state.auth.user.tagline,
         question_id: this.$route.params.question_id,
-        employer_id: this.$route.params.employer_id,
+        employer_id: this.$store.state.auth.user.employer_id,
         title: undefined,
         body: this.answerContent,
         votes: 0,
         user_voted: false
       })
       this.answerSending = false
-      this.$nuxt.$emit('refresh-employer', 'QUESTION-ANSWER')
+      this.getAnswers()
     },
     async getAnswers () {
       const answers = await this.$axios.get(`/employer/question/${this.$route.params.question_id}/answer`)
