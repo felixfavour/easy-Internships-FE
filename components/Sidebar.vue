@@ -26,7 +26,7 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/skills" :class="{ 'active': $route.name.includes('skills') }">
+        <nuxt-link to="/roles" :class="{ 'active': $route.name.includes('roles') }">
           <IconSkills />
           <span>Roles</span>
         </nuxt-link>

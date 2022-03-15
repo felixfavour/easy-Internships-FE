@@ -1,0 +1,188 @@
+<template>
+  <div class="modal-ctn">
+    <div ref="modal" class="modal side-modal-up new-skill">
+      <div class="header">
+        Create a New Role
+        <button class="clear-btn" @click="closeModal">
+          <IconClose />
+        </button>
+      </div>
+      <form @submit.prevent="">
+        <div class="form-group">
+          <input v-model="name" type="name">
+          <label for="name">
+            Role Name
+          </label>
+        </div>
+        <div class="form-group">
+          <textarea v-model="description" />
+          <label for="name">
+            Description
+          </label>
+        </div>
+        <button class="primary-btn dark" @click="createRole">
+          <Loader v-if="loading" class="mr-6" /> CREATE ROLE
+        </button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'NewRole',
+  data () {
+    return {
+      name: '',
+      description: '',
+      loading: false
+    }
+  },
+  methods: {
+    closeModal () {
+      this.$refs.modal.classList.remove('side-modal-up')
+      this.$refs.modal.classList.add('side-modal-down')
+      window.setTimeout(() => {
+        this.$emit('close-modal')
+      }, 600)
+    },
+    async createRole () {
+      this.loading = true
+      await this.$axios.post('/role', {
+        name: this.name,
+        description: this.description
+      })
+      this.loading = false
+      this.$nuxt.$emit('refresh')
+      this.closeModal()
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .student-enrolled {
+    background: var(--primary-light);
+    padding: 24px;
+    border-radius: 24px;
+    margin-bottom: 24px;
+  }
+  .student-enrolled b {
+    font-weight: 500;
+  }
+  .modal-ctn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .clear-btn {
+    height: auto;
+    padding: 4px;
+  }
+  .primary-btn.dark {
+    background: #00407B;
+    width: 100%;
+    margin-top: 3rem;
+  }
+  .modal {
+    background: #FFFFFF;
+    min-height: 100vh;
+    width: 550px;
+    padding: 3%;
+    border-radius: 24px 0 0 24px;
+  }
+  .header {
+    font-size: 1.1rem;
+    color: #00407B;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .input-image {
+    background: #007BEC;
+    height: 250px;
+    display: grid;
+    place-items: center;
+    border-radius: 24px;
+    margin: 2rem 0;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: relative;
+  }
+  .input-image input {
+    height: 250px;
+    cursor: pointer;
+  }
+  .input-image:active {
+    background: #0058aa;
+  }
+  .message {
+    text-align: center;
+  }
+
+  .side-modal-up {
+    animation: side-modal-up .6s ease-in-out forwards;
+    -webkit-animation: side-modal-up .6s ease-in-out forwards;
+  }
+  .side-modal-down {
+    animation: side-modal-down .6s ease-in-out forwards;
+    -webkit-animation: side-modal-down .6s ease-in-out forwards;
+  }
+
+  @keyframes modal-down {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+  }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+      -webkit-transform: translateY(20px);
+      -moz-transform: translateY(20px);
+      -ms-transform: translateY(20px);
+      -o-transform: translateY(20px);
+  }
+  }
+
+  @keyframes side-modal-up {
+    0% {
+      opacity: 0;
+      transform: translateX(700px);
+      -webkit-transform: translateX(700px);
+      -moz-transform: translateX(700px);
+      -ms-transform: translateX(700px);
+      -o-transform: translateX(700px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0vw);
+      -webkit-transform: translateX(0vw);
+      -moz-transform: translateX(0vw);
+      -ms-transform: translateX(0vw);
+      -o-transform: translateX(0vw);
+    }
+  }
+
+  @keyframes side-modal-down {
+    0% {
+      opacity: 1;
+      transform: translateX(0vw);
+      -webkit-transform: translateX(0vw);
+      -moz-transform: translateX(0vw);
+      -ms-transform: translateX(0vw);
+      -o-transform: translateX(0vw);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(700px);
+      -webkit-transform: translateX(700px);
+      -moz-transform: translateX(700px);
+      -ms-transform: translateX(700px);
+      -o-transform: translateX(700px);
+  }
+  }
+</style>

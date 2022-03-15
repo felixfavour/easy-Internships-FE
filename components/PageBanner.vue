@@ -9,10 +9,10 @@
         {{ data.head }}
       </div>
       <button v-if="data.hasSearch" class="primary-btn" @click="modal = true">
-        Enrol Student
+        Create New Role
       </button>
     </div>
-    <ModalNewStudent v-if="modal" @close-modal="modal = false" />
+    <ModalNewRole v-if="modal" @close-modal="modal = false" />
   </div>
 </template>
 

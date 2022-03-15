@@ -1,47 +1,36 @@
 <template>
-  <div class="skills-section page">
+  <div class="roles-section page">
     <PageBanner
       :data="{
-        sub: 'What makes you unique, prove your worth',
-        head: 'My Skills',
+        sub: 'What roles are you looking for? Let potential employees know',
+        head: 'My Roles',
         bgName: 'bg4',
-        hasSearch: false }"
+        hasSearch: true }"
     />
     <div class="page section">
       <div class="inner">
         <LargeLoader v-if="$store.state.loading" />
-        <div v-else-if="mySkills.length > 0 && !$store.state.loading" class="my-skills">
+        <div v-else-if="myRoles.length > 0 && !$store.state.loading" class="my-roles">
           <div class="card-grid">
-            <SkillCard v-for="skill in mySkills" :key="skill._id" :skill="skill.skills[0]" :my-skill="skill._id" />
+            <RoleCard v-for="role in myRoles" :key="role._id" :role="role.roles[0]" :my-role="role._id" />
           </div>
-          <button v-if="mySkills.length > 3" class="clear-btn">
+          <button v-if="myRoles.length > 3" class="clear-btn">
             View More
           </button>
         </div>
-        <EmptyState v-else text="You have added no skills." />
-        <div class="new-skill-card">
-          <div v-if="mySkills.length === 0" class="text">
-            Start by adding one of your skills.
-          </div>
-          <div v-else class="text">
-            Have a skill that is missing below?
-          </div>
-          <button class="primary-btn" @click="newSkillModal = true">
-            + CREATE NEW SKILL
-          </button>
-        </div>
+        <EmptyState v-else text="You have added no roles." />
         <div class="add-skill">
           <div class="header">
             <div class="text">
               Add a Skill
             </div>
-            <button class="clear-btn">
+            <!-- <button class="clear-btn">
               View More
-            </button>
+            </button> -->
           </div>
-          <LargeLoader v-if="$store.state.loading" />
+          <!-- <LargeLoader v-if="$store.state.loading" /> -->
           <div class="card-grid">
-            <SkillCard v-for="skill in skills" :key="skill._id" :skill="skill" />
+            <RoleCard v-for="role in roles" :key="role._id" :role="role" />
           </div>
         </div>
       </div>
@@ -52,36 +41,36 @@
 
 <script>
 export default {
-  name: 'Skills',
+  name: 'Roles',
   layout: 'dashLayout',
   data () {
     return {
       newSkillModal: false,
-      skills: [],
-      mySkills: [],
+      roles: [],
+      myRoles: [],
       loading: ''
     }
   },
   created () {
-    this.getMySkills()
-    this.getAllSkills()
+    this.getMyRoles()
+    this.getAllRoles()
   },
   mounted () {
     this.$nuxt.$on('refresh', () => {
-      this.getMySkills()
-      this.getAllSkills()
+      this.getMyRoles()
+      this.getAllRoles()
     })
   },
   methods: {
-    async getAllSkills () {
-      this.loading = 'all-skills'
-      const skills = await this.$axios.get('/skill')
-      this.skills = skills.data.data
+    async getAllRoles () {
+      this.loading = 'all-roles'
+      const roles = await this.$axios.get('/role')
+      this.roles = roles.data.data
     },
-    async getMySkills () {
-      this.loading = 'my-skills'
-      const skills = await this.$axios.get(`/skill/user/${this.$store.state.auth.user._id}`)
-      this.mySkills = skills.data.data
+    async getMyRoles () {
+      this.loading = 'my-roles'
+      const roles = await this.$axios.get(`/employer/${this.$store.state.auth.user._id}/role`)
+      this.myRoles = roles.data.data
     }
   }
 }
@@ -100,7 +89,7 @@ export default {
     /* grid-template-columns: repeat(4, 24.5%); */
     column-gap: 1.8%;
   }
-  .my-skills {
+  .my-roles {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -110,6 +99,10 @@ export default {
     align-items: center;
     justify-content: space-between;
     font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+  }
+  .header .text {
     font-weight: 600;
   }
   .new-skill-card {
