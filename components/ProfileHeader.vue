@@ -109,6 +109,12 @@ export default {
   .green-bg {
     background: var(--green);
   }
+  .clear-btn {
+    cursor: pointer;
+  }
+  .clear-btn:hover {
+    background: none;
+  }
   .auto-wh {
     width: auto;
     height: auto;
