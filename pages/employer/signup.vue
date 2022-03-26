@@ -6,7 +6,7 @@
       </div>
       <div class="large-text">
         <LargeLogo />
-        <div>for Universities</div>
+        <div>for Employers</div>
       </div>
     </div>
     <form @submit.prevent="">
@@ -26,17 +26,34 @@
         <div class="form-group">
           <input v-model="fullName" type="text">
           <label for="name">
-            University Name
+            Company Name
           </label>
         </div>
         <div class="form-group">
           <input v-model="username" type="text">
-          <label for="username">
-            University username
+          <label for="website">
+            Username (add an alias for your company on Ei)
+          </label>
+        </div>
+        <div class="form-group">
+          <input v-model="website" type="text">
+          <label for="website">
+            Company Website
           </label>
         </div>
       </section>
       <section v-show="section === 2">
+        <div class="form-group">
+          <select id="location" v-model="companySize " name="location">
+            <option v-for="size in $store.state.companySizes" :key="size" :value="size">
+              {{ size }} Employees
+            </option>
+          </select>
+          <label for="location">
+            Number of Employees
+          </label>
+          <IconArrowDown class="icon" />
+        </div>
         <div class="form-group">
           <div class="tel-flex">
             <img src="~assets/images/uae-flag.png" alt="">
@@ -44,54 +61,48 @@
           </div>
           <input v-model="phone" type="number">
           <label for="phone">
-            University Phone
-          </label>
-        </div>
-        <div class="form-group">
-          <input v-model="website" type="text">
-          <label for="website">
-            University Website
+            Company Phone
           </label>
         </div>
         <div class="form-group">
           <select id="location" v-model="location" name="location">
-            <option value="Abu Dhabi">
-              Abu Dhabi
-            </option>
-            <option value="Dubai">
-              Dubai
-            </option>
-            <option value="Sharjah">
-              Sharjah
-            </option>
-            <option value="Ajman">
-              Ajman
-            </option>
-            <option value="Umm Al-Quwain">
-              Umm Al-Quwain
-            </option>
-            <option value="Fujairah">
-              Fujairah
-            </option>
-            <option value="Ras Al Khaimah">
-              Ras Al Khaimah
+            <option v-for="locationLoop in $store.state.locations" :key="locationLoop" :value="locationLoop">
+              {{ locationLoop }}
             </option>
           </select>
           <label for="location">
-            University Location
+            Company Location
+          </label>
+          <IconArrowDown class="icon" />
+        </div>
+        <div class="form-group">
+          <select id="sector" v-model="companySector" name="sector">
+            <option v-for="sector in $store.state.sectors" :key="sector" :value="sector">
+              {{ sector }}
+            </option>
+          </select>
+          <label for="location">
+            Company Sector
           </label>
           <IconArrowDown class="icon" />
         </div>
       </section>
       <section v-show="section === 3">
+        <!-- ABOUT COMPANY -->
+        <div class="form-group">
+          <textarea v-model="bio" type="text" placeholder="My Company is a..." />
+          <label for="name">
+            About Company
+          </label>
+        </div>
         <!-- LOGO UPLOAD -->
         <div class="form-group">
           <label for="name" class="image">
             <input type="file" @input="logo = $event.target.files[0]; uploadImage($event.target.files[0], 'logo')">
-            University Logo
+            Company Logo
           </label>
           <label for="name">
-            University Logo
+            Company Logo
           </label>
         </div>
         <Loader v-if="$store.state.loading && loading === 'logo'" class="mr-6" />
@@ -100,14 +111,14 @@
         <div class="form-group">
           <label for="name" class="image">
             <input type="file" @input="icon = $event.target.files[0]; uploadImage($event.target.files[0], 'icon')">
-            University Icon
+            Company Icon
           </label>
           <label for="name">
-            University Icon
+            Company Icon
           </label>
         </div>
         <Loader v-if="$store.state.loading && loading === 'icon'" class="mr-6" />
-        <div v-else-if="icon !== null && !$store.state.loading" class="icon-preview bg-img" :style="`background-image: url(${getURL(icon)})`" />
+        <div v-if="icon !== null && !$store.state.loading" class="icon-preview bg-img" :style="`background-image: url(${getURL(icon)})`" />
       </section>
       <button class="primary-btn" @click="nextButtonAction">
         <Loader v-if="$store.state.loading && loading === 'signup'" class="mr-6" />{{ signUpText }}
@@ -129,6 +140,10 @@ export default {
   layout: 'authLayout',
   data () {
     return {
+      logo: null,
+      logoUrl: '',
+      icon: null,
+      iconUrl: '',
       fullName: '',
       email: '',
       username: '',
@@ -137,13 +152,9 @@ export default {
       location: 'Dubai',
       website: '',
       tagline: '',
-      avatar: '',
-      bio: '',
-      logo: null,
-      logoUrl: '',
-      icon: null,
-      iconUrl: '',
-      loading: ''
+      companySize: '0 - 10',
+      companySector: 'Finance',
+      bio: ''
     }
   },
   computed: {
@@ -186,7 +197,7 @@ export default {
         email: this.email,
         username: this.username,
         password: this.password,
-        type: 'school',
+        type: 'employer',
         phone: this.phone,
         location: this.location,
         website: this.website,
@@ -196,12 +207,16 @@ export default {
         bio: this.bio
       })
       this.$toasted.success('You have successfully signed up, Now Sign in.')
+      this.$router.push('/login')
     }
   }
 }
 </script>
 
 <style scoped>
+  .form-group textarea {
+    min-height: 120px;
+  }
   .top-bg {
     background: var(--primary);
     height: 355px;

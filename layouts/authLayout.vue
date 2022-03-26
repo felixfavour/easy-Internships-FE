@@ -33,13 +33,13 @@
           Be the best employee or employer
         </div>
         <div v-show="$route.name.includes('signup')" class="actions come-down-sm">
-          <nuxt-link
+          <a
             v-show="section === 1"
-            to="/school/signup"
+            href="https://ei-school.herokuapp.com/school/signup"
             :class="{'primary-btn uni-btn': true, 'active-btn': $route.name.includes('school')}"
           >
             University
-          </nuxt-link>
+          </a>
           <nuxt-link
             v-show="section === 1"
             to="/employer/signup"
