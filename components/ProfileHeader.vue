@@ -117,6 +117,12 @@ export default {
     top: 12px;
     left: 12px;
   }
+  .clear-btn {
+    cursor: pointer;
+  }
+  .clear-btn:hover {
+    background: none;
+  }
 
   .profile-header {
     position: relative;
