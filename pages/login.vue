@@ -28,7 +28,7 @@
       </button>
       <div class="signup-text">
         <span>Don't have an account?</span>
-        <nuxt-link to="/school/signup">
+        <nuxt-link to="/employer/signup">
           Sign up
         </nuxt-link>
       </div>
