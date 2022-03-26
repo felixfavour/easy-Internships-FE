@@ -6,7 +6,7 @@
           {{ review.title }}
         </div>
         <div class="text-sub">
-          {{ review.user_tagline }}
+          {{ review.reviewer_name }} - {{ review.user_tagline }}
         </div>
       </div>
       <div class="rating">
