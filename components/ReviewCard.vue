@@ -11,7 +11,7 @@
       </div>
       <div class="rating">
         <h2 class="count">
-          {{ review.rating }}
+          {{ review.rating }}/5
         </h2>
         <IconStarRating :rating="review.rating" :brackets="false" />
       </div>

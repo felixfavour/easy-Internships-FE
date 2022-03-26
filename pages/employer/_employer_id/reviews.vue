@@ -5,6 +5,9 @@
         <section>
           <div class="header">
             Reviews
+            <button class="clear-btn" @click="addReviewVisible = true">
+              + Add Your Review
+            </button>
           </div>
           <div class="reviews-list">
             <ReviewCard v-for="review in reviews" :key="review._id" :review="review" />
@@ -12,6 +15,7 @@
         </section>
       </div>
     </div>
+    <ModalAddReview v-if="addReviewVisible" :employer="employer" @close-modal="addReviewVisible = false" />
   </div>
 </template>
 
@@ -28,6 +32,11 @@ export default {
       type: Array,
       default: () => {}
     }
+  },
+  data () {
+    return {
+      addReviewVisible: false
+    }
   }
 }
 </script>
@@ -41,5 +50,11 @@ export default {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .clear-btn {
+    color: var(--primary);
   }
 </style>
