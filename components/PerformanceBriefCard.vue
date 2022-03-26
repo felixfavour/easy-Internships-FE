@@ -35,7 +35,7 @@ export default {
     align-items: center;
     margin-bottom: 8px;
     justify-content: space-between;
-    color: #00407B;
+    color: var(--primary-dark);
     font-size: 0.875rem;
   }
   .row-2 {

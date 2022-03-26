@@ -1,26 +1,21 @@
 <template>
   <div class="modal-ctn">
-    <div ref="modal" class="modal new-skill come-up-1">
-      <div class="header linkedin">
-        Connect your LinkedIn Account
+    <div ref="modal come-up-1" class="modal new-skill come-up-1">
+      <div class="header">
+        Add Salary
       </div>
       <form @submit.prevent="">
         <div class="form-group">
-          <input v-model="link" placeholder="Link to your LinkedIn profile" @input="validateLink">
-        </div>
-        <div v-if="link.length > 0" class="form-group">
-          <Loader v-if="validateLoading" />
-          <div v-else-if="linkedin !== null" class="linkedin-valid come-down-sm">
-            {{ linkedin.name }}
-          </div>
+          <span class="currency">AED</span>
+          <input v-model.number="salary" :placeholder="`Monthly Salary of your ${role.name}s`">
         </div>
         <div class="actions">
           <button class="primary-btn white" @click="$emit('close-modal')">
             Cancel
           </button>
-          <button :disabled="!(link.length > 4)" class="primary-btn dark" @click="addLinkedIn">
+          <button :disabled="!(salary >= 100)" class="primary-btn dark" @click="addSalary">
             <Loader v-if="connectLoading" />
-            Connect
+            Submit
           </button>
         </div>
       </form>
@@ -30,47 +25,34 @@
 
 <script>
 export default {
-  name: 'AddLinkedIn',
+  name: 'AddSalary',
+  props: {
+    role: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
-      link: '',
+      salary: '',
       linkedin: null,
       validateLoading: false,
       connectLoading: false
     }
   },
   methods: {
-    validateLink () {
-      this.validateLoading = true
-      setTimeout(() => {
-        if (this.link.includes('linkedin.com')) {
-          const name = this.link?.replace('https://', '')
-            .replace('http://', '')
-            .replace('www.linkedin.com/in/', '')
-            .replace('linkedin.com/in/', '')
-            .replace('www.linkedin.com/company/', '')
-            .replace('linkedin.com/company/', '')
-
-          this.linkedin = {
-            name: `${name.split('-')[0]} ${name.split('-')[1] || ''}`.replace('/', '')
-          }
-        } else {
-          this.linkedin = null
-          this.$toasted.error('Linkedin profile URL is in valid.')
-        }
-        this.validateLoading = false
-      }, 1400)
-    },
-    async getUser () {
-      const user = await this.$axios.get(`/user/${this.$store.state.auth.user._id}`)
-      this.$store.commit('auth/setUser', user.data.data)
-    },
-    async addLinkedIn () {
+    async addSalary () {
       this.connectLoading = true
-      await this.$axios.put(`/user/${this.$store.state.auth.user._id}`, {
-        linkedin: this.link
+      await this.$axios.post('/employer/salary', {
+        user_id: this.$store.state.auth.user._id,
+        employer_role_id: this.role.employer_role_id,
+        role_id: this.role._id,
+        employer_id: this.$store.state.auth.user.employer_id,
+        amount: this.salary,
+        role_name: this.role.name,
+        competition_comparison: 0
       })
-      await this.getUser()
+      this.$toasted.success('Salary was uploaded successfully. Thank you!')
       this.connectLoading = false
       this.$emit('close-modal')
     }
@@ -79,9 +61,25 @@ export default {
 </script>
 
 <style scoped>
+  .currency {
+    background: var(--primary-dark);
+    color: #FFFFFF;
+    padding: 8px;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    inset: 0;
+    width: 70px;
+    border-radius: 8px 0 0 8px;
+  }
+  input {
+    padding-left: 90px;
+  }
   .modal-ctn {
     display: grid;
     place-items: center;
+    z-index: 9;
   }
   .clear-btn {
     height: auto;
@@ -108,6 +106,7 @@ export default {
     width: 550px;
     padding: 3%;
     border-radius: 24px;
+    z-index: 9;
   }
   .header {
     font-size: 1.2rem;

@@ -53,7 +53,7 @@ export default {
     justify-content: space-between;
   }
   .text-main {
-    color: #00407B;
+    color: var(--primary-dark);
     font-size: 1.1rem;
     font-weight: 600;
   }
@@ -68,7 +68,7 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: column;
-    color: #00407B;
+    color: var(--primary-dark);
   }
 
   /* ROW 2 */

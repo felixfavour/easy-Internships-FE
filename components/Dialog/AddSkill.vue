@@ -66,13 +66,13 @@ export default {
     align-items: center;
   }
   .primary-btn.dark {
-    background: #00407B;
+    background: var(--primary-dark);
     margin: 0;
     margin-top: 2rem;
   }
   .primary-btn.white {
     background: #FFFFFF;
-    color: #00407B;
+    color: var(--primary-dark);
     margin: 0;
     margin-top: 2rem;
   }
@@ -84,7 +84,7 @@ export default {
   }
   .header {
     font-size: 1.2rem;
-    color: #00407B;
+    color: var(--primary-dark);
     font-weight: 600;
     display: flex;
     justify-content: center;

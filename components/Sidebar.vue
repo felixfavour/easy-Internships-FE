@@ -77,7 +77,7 @@ export default {
   }
   .sidebar-header {
     height: var(--header-height);
-    border-bottom: 2px solid #00407B;
+    border-bottom: 2px solid var(--primary-dark);
     display: flex;
     align-items: center;
     padding: 0 24px;

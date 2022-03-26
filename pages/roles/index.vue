@@ -12,7 +12,13 @@
         <LargeLoader v-if="$store.state.loading" />
         <div v-else-if="myRoles.length > 0 && !$store.state.loading" class="my-roles">
           <div class="card-grid">
-            <RoleCard v-for="role in myRoles" :key="role._id" :role="role.roles[0]" :my-role="role._id" />
+            <RoleCard
+              v-for="role in myRoles"
+              :key="role._id"
+              :role="{...role.roles[0], employer_role_id: role._id}"
+              :my-role="role._id"
+              @open-modal="salaryModalVisible = true; currentRole = $event"
+            />
           </div>
           <button v-if="myRoles.length > 3" class="clear-btn">
             View More
@@ -35,6 +41,7 @@
         </div>
       </div>
     </div>
+    <ModalAddSalary v-if="salaryModalVisible" :role="currentRole" @close-modal="salaryModalVisible = false" />
     <ModalNewSkill v-if="newSkillModal" @close-modal="newSkillModal = false" />
   </div>
 </template>
@@ -46,6 +53,8 @@ export default {
   data () {
     return {
       newSkillModal: false,
+      salaryModalVisible: false,
+      currentRole: {},
       roles: [],
       myRoles: [],
       loading: ''
@@ -117,7 +126,7 @@ export default {
     margin-bottom: 2rem;
   }
   .new-skill-card .text {
-    color: #00407B;
+    color: var(--primary-dark);
     font-size: 1.8rem;
     font-weight: 600;
   }

@@ -5,6 +5,11 @@
         {{ role.name }}
       </h4>
       <div class="actions">
+        <button v-if="myRole" class="btn" @click="$emit('open-modal', role)">
+          <Loader v-if="roleRemoving" class="icon" />
+          <span v-else class="icon">+</span>
+          Add Salary
+        </button>
         <button v-if="myRole" class="btn remove" @click="removeRole">
           <Loader v-if="roleRemoving" class="icon" />
           <span v-else class="icon">-</span>
@@ -43,7 +48,8 @@ export default {
     return {
       roleRemoving: false,
       roleAdding: false,
-      expanded: false
+      expanded: false,
+      salaryModalVisible: false
     }
   },
   methods: {

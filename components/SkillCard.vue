@@ -85,7 +85,7 @@ export default {
     position: absolute;
     top: 12px;
     right: 12px;
-    color: #00407B;
+    color: var(--primary-dark);
     background: #B0D9FF;
     padding: 3px 6px;
     border-radius: 4px;
