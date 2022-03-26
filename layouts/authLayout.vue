@@ -40,13 +40,13 @@
           >
             University
           </nuxt-link>
-          <nuxt-link
+          <a
             v-show="section === 1"
-            to="/employer/signup"
+            href="https://ei-employers.herokuapp.com/employer/signup"
             :class="{'primary-btn employer-btn': true, 'active-btn': $route.name.includes('employer')}"
           >
             Employer
-          </nuxt-link>
+          </a>
           <button v-show="section > 1" class="primary-btn uni-btn" @click="goBack">
             Go Back
           </button>
