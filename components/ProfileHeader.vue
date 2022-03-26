@@ -94,7 +94,8 @@ export default {
     async updateUser (type) {
       const user = await this.$axios.put(`/user/${this.$store.state.auth.user._id}`, (type === 'avatar'
         ? {
-            avatar: this.avatar
+            avatar: this.avatar,
+            icon: this.avatar
           }
         : {
             cover_photo: this.coverPhoto
