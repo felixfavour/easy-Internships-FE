@@ -1,5 +1,5 @@
 <template>
-  <div class="review-card">
+  <div class="review-card come-down-sm">
     <div class="row row-1">
       <div class="main">
         <div class="text-main">

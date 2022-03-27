@@ -4,7 +4,7 @@
       <div class="inner">
         <section>
           <div class="header">
-            Reviews
+            Reviews {{ selectedTags.length > 0 ? `- filtered by ${selectedTags}` : '' }}
             <button class="clear-btn" @click="addReviewVisible = true">
               + Add Your Review
             </button>
