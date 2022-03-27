@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="row-2">
-          <IconPeople class="icon-people" /> {{ employer.company_size }} Employees
+          <IconPeople class="icon-people" /> {{ employer.company_size }} Employees • Company in {{ employer.company_sector }}
         </div>
       </div>
       <div class="actions come-up-2">

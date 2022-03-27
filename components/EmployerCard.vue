@@ -20,10 +20,10 @@
       </div>
       <div class="col col-2">
         <div class="main">
-          {{ employer.interviews_difficulty || '- - -' }}
+          {{ employer.company_sector || '- - -' }}
         </div>
         <div class="sub">
-          Interviews
+          Sector
         </div>
       </div>
       <div class="col col-3">

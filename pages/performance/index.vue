@@ -14,8 +14,8 @@
           <div class="card-grid briefs">
             <PerformanceBriefCard :performance="{ label: 'Total Visits', value: performance.total_visits }" />
             <PerformanceBriefCard :performance="{ label: 'Unique Visits', value: performance.unique_visits }" />
-            <PerformanceBriefCard :performance="{ label: 'Academic Score', value: performance.academics_score }" />
-            <PerformanceBriefCard :performance="{ label: 'Skills Score', value: performance.skills_score }" />
+            <PerformanceBriefCard :performance="{ label: 'Academic Score', value: `${performance.academics_score}%` }" />
+            <PerformanceBriefCard :performance="{ label: 'Skills Score', value: `${performance.skills_score}%` }" />
           </div>
           <div class="chart-ctn">
             <div class="chart-header">

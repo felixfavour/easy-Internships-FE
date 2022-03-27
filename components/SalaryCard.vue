@@ -6,7 +6,7 @@
           {{ salary.role_name }}
         </div>
         <div class="text-sub">
-          - - - submissions
+          {{ salary.submissions }} {{ salary.submissions === 1 ? 'submission' : 'submissions' }}
         </div>
       </div>
       <div class="salary">
@@ -20,16 +20,16 @@
     </div>
     <div class="row-3">
       <!-- GREEN METRIC -->
-      <div class="metric">
+      <div v-if="salary.amount > salary.average_salary" class="metric">
         <IconGreenArrow class="icon" />
-        - - - % higher than other companies
+        {{ Math.ceil(salary.amount / salary.average_salary * 100 - 100) }}% higher than the average earner
       </div>
 
       <!-- RED METRIC -->
-      <!-- <div class="metric red">
+      <div v-else class="metric red">
         <IconRedArrow class="icon" />
-        25% lower than other companies
-      </div> -->
+        {{ 100 - Math.ceil(salary.amount / salary.average_salary * 100) }}% lower than the average earner
+      </div>
     </div>
   </div>
 </template>
