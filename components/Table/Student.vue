@@ -24,7 +24,7 @@
             <!-- Action -->
           </th>
         </tr>
-        <tr v-for="student in data" :key="student._id" class="content-row" @click="$router.push('#')">
+        <tr v-for="student in data" :key="student._id" class="content-row">
           <td>
             {{ student._id }}
           </td>
@@ -41,9 +41,14 @@
             {{ formatDate(student.createdAt) }}
           </td>
           <td>
-            <!-- <nuxt-link :to="`/profile/${student._id}`">
+            <nuxt-link :to="`/students/${student._id}`">
               <span class="material-icons">See Student</span>
-            </nuxt-link> -->
+            </nuxt-link>
+          </td>
+          <td>
+            <button class="primary-btn" @click="$nuxt.$emit('open-am', student)">
+              Update Academic Score
+            </button>
           </td>
         </tr>
       </table>
@@ -250,8 +255,15 @@ th:nth-child(5), td:nth-child(5) {
   min-width: 100px;
 }
 th:nth-child(6), td:nth-child(6) {
+  width: 10%;
+  min-width: 80px;
+}
+th:nth-child(7), td:nth-child(7) {
   width: 15%;
   min-width: 100px;
+}
+.primary-btn {
+  width: 100%;
 }
 
 /* MEDIA QUERIES */

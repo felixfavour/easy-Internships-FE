@@ -13,12 +13,12 @@
           <span>Students</span>
         </nuxt-link>
       </li>
-      <li>
+      <!-- <li>
         <nuxt-link to="/performance" :class="{ 'active': $route.name.includes('performance') }">
           <IconPerformance />
           <span>Statistics</span>
         </nuxt-link>
-      </li>
+      </li> -->
       <!-- <li>
         <nuxt-link to="/interests/me" :class="{ 'active': $route.name.includes('interests-me') }">
           <IconInterests />
@@ -71,7 +71,7 @@ export default {
   }
   .sidebar-header {
     height: var(--header-height);
-    border-bottom: 2px solid #00407B;
+    border-bottom: 2px solid var(--primary-dark);
     display: flex;
     align-items: center;
     padding: 0 24px;

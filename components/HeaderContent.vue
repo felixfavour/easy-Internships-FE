@@ -31,6 +31,9 @@
     <span v-else-if="$route.name === 'profile-security'" class="not-middle">
       Change Password
     </span>
+    <span v-else-if="$route.name === 'students-user_id'" class="not-middle">
+      Student Profile
+    </span>
     <span v-else-if="$route.name === 'employer-employer_id-question_id'" class="not-middle">
       Answer a Question
     </span>

@@ -124,7 +124,7 @@ export default {
     margin-bottom: 2rem;
   }
   .new-skill-card .text {
-    color: #00407B;
+    color: var(--primary-dark);
     font-size: 1.8rem;
     font-weight: 600;
   }

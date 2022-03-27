@@ -26,13 +26,26 @@
     <div class="main-content">
       <Header />
       <Nuxt class="main-page-content" />
+      <ModalAddAcademicScore v-if="academicModalVisible" :student="student" @close-modal="academicModalVisible = false" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DashLayout'
+  name: 'DashLayout',
+  data () {
+    return {
+      academicModalVisible: false,
+      student: {}
+    }
+  },
+  mounted () {
+    this.$nuxt.$on('open-am', (student) => {
+      this.student = student
+      this.academicModalVisible = true
+    })
+  }
 }
 </script>
 

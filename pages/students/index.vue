@@ -5,7 +5,7 @@
         sub: 'See all students enrolled in your institution',
         head: 'All Students',
         bgName: 'bg1',
-        hasSearch: true }"
+        hasSearch: false }"
     />
     <div class="section">
       <div class="inner">
@@ -27,7 +27,7 @@ export default {
     }
   },
   created () {
-    this.getPopularEmployers()
+    // this.getPopularEmployers()
   },
   methods: {
     async getPopularEmployers () {

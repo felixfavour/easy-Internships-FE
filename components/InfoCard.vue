@@ -30,7 +30,7 @@ export default {
     min-width: 160px;
   }
   .label {
-    color: #00407B90;
+    color: var(--primary-dark)90;
     font-weight: 500;
     font-size: 0.9rem;
   }

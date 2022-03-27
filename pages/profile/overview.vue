@@ -14,14 +14,14 @@
         <InfoCard :info="{ label: 'School mail', value: user.email }" />
       </div>
     </section>
-    <section class="about">
+    <!-- <section class="about">
       <div class="header">
         School
       </div>
       <div class="content">
         {{ school.full_name }}
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 

@@ -1,26 +1,21 @@
 <template>
   <div class="modal-ctn">
     <div ref="modal" class="modal new-skill come-up-1">
-      <div class="header linkedin">
-        Connect your LinkedIn Account
+      <div class="header">
+        Update {{ student.full_name }}'s Academic Score
       </div>
       <form @submit.prevent="">
         <div class="form-group">
-          <input v-model="link" placeholder="Link to your LinkedIn profile" @input="validateLink">
-        </div>
-        <div v-if="link.length > 0" class="form-group">
-          <Loader v-if="validateLoading" />
-          <div v-else-if="linkedin !== null" class="linkedin-valid come-down-sm">
-            {{ linkedin.name }}
-          </div>
+          <span class="unit">%</span>
+          <input v-model.number="percent" type="number" placeholder="Enter score in percentage">
         </div>
         <div class="actions">
           <button class="primary-btn white" @click="$emit('close-modal')">
             Cancel
           </button>
-          <button :disabled="!(link.length > 4)" class="primary-btn dark" @click="addLinkedIn">
+          <button :disabled="!(percent >= 1)" class="primary-btn dark" @click="updateAcademicScore">
             <Loader v-if="connectLoading" />
-            Connect
+            Update
           </button>
         </div>
       </form>
@@ -30,47 +25,26 @@
 
 <script>
 export default {
-  name: 'AddLinkedIn',
+  name: 'AddAcademicScore',
+  props: {
+    student: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
-      link: '',
-      linkedin: null,
-      validateLoading: false,
+      percent: '',
       connectLoading: false
     }
   },
   methods: {
-    validateLink () {
-      this.validateLoading = true
-      setTimeout(() => {
-        if (this.link.includes('linkedin.com')) {
-          const name = this.link?.replace('https://', '')
-            .replace('http://', '')
-            .replace('www.linkedin.com/in/', '')
-            .replace('linkedin.com/in/', '')
-            .replace('www.linkedin.com/company/', '')
-            .replace('linkedin.com/company/', '')
-
-          this.linkedin = {
-            name: `${name.split('-')[0]} ${name.split('-')[1] || ''}`.replace('/', '')
-          }
-        } else {
-          this.linkedin = null
-          this.$toasted.error('Linkedin profile URL is in valid.')
-        }
-        this.validateLoading = false
-      }, 1400)
-    },
-    async getUser () {
-      const user = await this.$axios.get(`/user/${this.$store.state.auth.user._id}`)
-      this.$store.commit('auth/setUser', user.data.data)
-    },
-    async addLinkedIn () {
+    async updateAcademicScore () {
       this.connectLoading = true
-      await this.$axios.put(`/user/${this.$store.state.auth.user._id}`, {
-        linkedin: this.link
+      await this.$axios.put(`/user/${this.student._id}`, {
+        academics_score: this.percent
       })
-      await this.getUser()
+      this.$toasted.success('Academics score has been updated.')
       this.connectLoading = false
       this.$emit('close-modal')
     }
@@ -79,6 +53,19 @@ export default {
 </script>
 
 <style scoped>
+  .unit {
+    background: var(--primary-dark);
+    color: #FFFFFF;
+    padding: 8px;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    inset: 0;
+    left: auto;
+    width: 70px;
+    border-radius: 0 8px 8px 0;
+  }
   .modal-ctn {
     display: grid;
     place-items: center;

@@ -86,7 +86,7 @@ export default {
     padding: 4px;
   }
   .primary-btn.dark {
-    background: #00407B;
+    background: var(--primary-dark);
     width: 100%;
     margin-top: 3rem;
   }
@@ -99,7 +99,7 @@ export default {
   }
   .header {
     font-size: 2rem;
-    color: #00407B;
+    color: var(--primary-dark);
     font-weight: 600;
     display: flex;
     justify-content: space-between;
