@@ -204,7 +204,9 @@ export default {
         tagline: this.tagline,
         avatar: this.logoUrl,
         icon: this.iconUrl,
-        bio: this.bio
+        bio: this.bio,
+        company_sector: this.companySector,
+        company_size: this.companySize
       })
       this.$toasted.success('You have successfully signed up, Now Sign in.')
       this.$router.push('/login')
