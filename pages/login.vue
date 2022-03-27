@@ -57,7 +57,7 @@ export default {
       })
       this.$toasted.success('Login successful')
       this.$store.commit('auth/setToken', res.data.data.token)
-      this.$store.commit('auth/setUser', res.data.data.user)
+      this.$store.commit('auth/setUser', { ...res.data.data.user, school_id: res.data.data.user_type_id })
       this.$router.push('/students')
     }
   }

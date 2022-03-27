@@ -54,7 +54,7 @@ export default {
   name: 'Sidebar',
   methods: {
     logOut () {
-      this.$router.push(`/${this.$store.state.auth.studentSchool.username}/login`)
+      this.$router.push('/login')
       this.$store.commit('auth/logOut')
     }
   }

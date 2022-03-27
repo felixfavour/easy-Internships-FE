@@ -74,7 +74,7 @@ export default {
   methods: {
     async getStudents () {
       this.isLoading = true
-      const students = await this.$axios.get(`/user/school/${this.$store.state.auth.user._id}`)
+      const students = await this.$axios.get(`/user/school/${this.$store.state.auth.user.school_id}`)
       this.data = students.data.data.reverse()
       this.isLoading = false
     },

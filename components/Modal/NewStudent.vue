@@ -79,7 +79,7 @@ export default {
         email: this.email,
         username: this.username,
         password: this.generatePassword(),
-        student_school: this.$store.state.auth.user._id,
+        student_school: this.$store.state.auth.user.school_id,
         type: 'student',
         phone: this.phone,
         location: 'Dubai',
