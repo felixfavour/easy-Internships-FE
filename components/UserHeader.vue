@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="actions">
-          <nuxt-link to="#" class="primary-btn" @click.native="addInterest">
+          <nuxt-link to="#" class="primary-btn" @click.native="$nuxt.$emit('open-am', user)">
             <Loader v-if="$store.state.loading" class="icon" /> <span class="icon">+</span> Add Academic Score
           </nuxt-link>
         </div>
