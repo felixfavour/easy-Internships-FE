@@ -9,15 +9,17 @@
         action: 'Register as University',
         colour: '#7436E7',
         type: 'The School',
+        url: 'https://ei-school.herokuapp.com/school/signup',
         link: '#school' }"
     />
     <LandingPartyShowcase
       :party="{
         question: 'How are we helping Students?',
-        content: 'EASYiNTERNSHIPS is helping students make informed decisions on their future internship roles and making it easier for employers to find them based on their unique abilities.',
-        action: 'Register as Student',
+        content: 'EASYiNTERNSHIPS is helping students make informed decisions on their future internship roles and making it easier for employers to find them based on their unique abilities. **students get access from their university administrator',
+        action: 'Login as Student',
         colour: '#007BEC',
         type: 'The Student',
+        url: '/mdx/login',
         link: '#student' }"
     />
     <LandingPartyShowcase
@@ -26,6 +28,7 @@
         content: 'EASYiNTERNSHIPS is helping employers to ensure not just the smartest people but the smartest people for the job, employers set standards and others follow.',
         action: 'Register as Employer',
         colour: '#00A581',
+        url: 'https://ei-employers.herokuapp.com/employer/signup',
         type: 'The Employer',
         link: '#employer' }"
     />

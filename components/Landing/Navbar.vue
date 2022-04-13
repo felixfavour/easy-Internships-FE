@@ -8,7 +8,7 @@
       <nuxt-link class="login-btn" to="/mdx/login">
         Login
       </nuxt-link>
-      <nuxt-link class="start-btn" to="">
+      <nuxt-link class="start-btn" to="#parties">
         Get Started
       </nuxt-link>
     </div>
@@ -29,7 +29,7 @@ export default {
     place-items: center;
     text-align: center;
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 4px;
   }
   .container {
     display: flex;

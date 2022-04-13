@@ -10,7 +10,7 @@
       <div class="text-3">
         {{ party.content }}
       </div>
-      <a target="_blank" class="action-btn" :style="`background: ${party.colour}`" href="http://">
+      <a target="_blank" class="action-btn" :style="`background: ${party.colour}`" :href="party.url">
         {{ party.action }}
       </a>
     </div>
