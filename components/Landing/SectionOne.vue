@@ -5,12 +5,12 @@
       <div class="hero" />
     </div>
     <div class="right-side">
-      <div class="text-1">
+      <h1 class="text-1">
         We're making sure you <span>never settle</span> for less.
-      </div>
-      <div class="text-2">
+      </h1>
+      <h3 class="text-2">
         Simplifying Internship employments for all students, employers and schools
-      </div>
+      </h3>
       <nuxt-link class="see-btn" to="/">
         See How
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +32,7 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 800px;
+    height: 750px;
   }
   .left-side {
     width: 50%;
