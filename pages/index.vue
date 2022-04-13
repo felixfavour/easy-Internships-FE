@@ -1,13 +1,19 @@
 <template>
-  <div class="section page">
-    <div class="inner">
-      This is home page
-    </div>
+  <div class="container">
+    <LandingSectionOne />
+    <LandingParties />
+    <LandingPartyCard />
+    <LandingPartyCard />
+    <LandingPartyCard />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  layout: 'websiteLayout'
 }
 </script>
+
+<style scoped>
+</style>
