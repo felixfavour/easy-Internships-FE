@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="parties" class="container">
     <h2 class="header">
       The <span>Primary</span> Parties.
     </h2>
@@ -37,6 +37,7 @@ export default {
     color: var(--primary-dark);
     margin-bottom: 2rem;
     font-size: 2rem;
+    padding-top: 30px;
   }
   h2 > span {
     color: var(--primary);

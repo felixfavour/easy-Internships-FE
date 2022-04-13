@@ -11,7 +11,7 @@
       <h3 class="text-2">
         Simplifying Internship employments for all students, employers and schools
       </h3>
-      <nuxt-link class="see-btn" to="/">
+      <nuxt-link class="see-btn" to="#parties">
         See How
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 13L12 20L19 13M12 20V4V20Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -32,7 +32,10 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 750px;
+    height: 720px;
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
   }
   .left-side {
     width: 50%;

@@ -1,5 +1,5 @@
 <template>
-  <div :id="party.link" class="container">
+  <div :id="party.link.substring(1)" class="container">
     <div class="left-side">
       <div class="text-1">
         {{ party.question }}
@@ -47,7 +47,10 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 15% 0;
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 7% 0;
   }
   .left-side {
     width: 45%;

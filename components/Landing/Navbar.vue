@@ -36,6 +36,9 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding-top: 0;
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
   }
   .logos {
     display: flex;

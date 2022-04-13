@@ -1,10 +1,8 @@
 <template>
-  <div class="section page">
-    <div class="inner">
-      <LandingNavbar />
-      <Nuxt />
-      <LandingFooter />
-    </div>
+  <div class="section">
+    <LandingNavbar />
+    <Nuxt />
+    <LandingFooter />
   </div>
 </template>
 
@@ -16,7 +14,7 @@ export default {
 
 <style scoped>
 .section {
-  /* display: block; */
+  flex-direction: column;
 }
 .section > .inner {
   width: 90%;
