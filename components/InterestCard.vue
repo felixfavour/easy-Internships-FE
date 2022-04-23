@@ -1,7 +1,7 @@
 <template>
   <div class="employer-card">
     <div class="row row-1">
-      <div class="logo" :style="`background-image: url(${interest.user[0].icon})`" />
+      <div class="logo" :style="interest.user[0].avatar ? `background-image: url(${interest.user[0].avatar})` : ''" />
       <div class="info-1">
         <div class="name">
           {{ interest.user[0].full_name }}
@@ -72,7 +72,7 @@ export default {
     align-items: center;
   }
   .logo {
-    background-image: url('~assets/images/sample-employer.png');
+    background-image: url('~assets/images/person.png');
     margin-right: 12px;
     width: 40px;
     height: 40px;

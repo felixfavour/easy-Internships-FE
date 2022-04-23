@@ -63,7 +63,7 @@ export default {
     },
     async getUser () {
       const user = await this.$axios.get(`/user/${this.$store.state.auth.user._id}`)
-      this.$store.commit('auth/setUser', user.data.data)
+      this.$store.commit('auth/setUser', { ...user.data.data, employer_id: this.$store.state.auth.user.employer_id })
     },
     async addLinkedIn () {
       this.connectLoading = true
