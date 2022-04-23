@@ -73,7 +73,7 @@ export default {
   methods: {
     async getUser () {
       const user = await this.$axios.get(`/user/${this.$store.state.auth.user._id}`)
-      this.$store.commit('auth/setUser', user.data.data)
+      this.$store.commit('auth/setUser', { ...user.data.data, school_id: this.$store.state.auth.user.school_id })
     },
     async getUserActivity () {
       const activities = await this.$axios.get(`/user/activity/${this.$store.state.auth.user._id}`)
@@ -99,7 +99,7 @@ export default {
         : {
             cover_photo: this.coverPhoto
           }))
-      this.$store.commit('auth/setUser', user.data.data)
+      this.$store.commit('auth/setUser', { ...user.data.data, school_id: this.$store.state.auth.user.school_id })
     }
   }
 }

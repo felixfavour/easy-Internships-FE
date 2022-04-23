@@ -5,7 +5,9 @@
 export default function ({ $axios, store }) {
   $axios.onError((error) => {
     const parsedError = (error.response ? error.response.data.msg : null)
-    store.dispatch('errorDispatch', (parsedError || error.response.data))
+    if (!parsedError.includes('EASYiNTERNSHIPS.users')) {
+      store.dispatch('errorDispatch', (parsedError || error.response.data))
+    }
     if (parsedError?.toLowerCase() === 'invalid authorization header') {
       window.location.pathname = `/${store.state.auth.studentSchool.username}/login`
     }
