@@ -42,7 +42,7 @@
           </nuxt-link>
           <a
             v-show="section === 1"
-            href="https://ei-employers.herokuapp.com/employer/signup"
+            href="https://easy-internships-a2013lw5n-felixfavours-projects.vercel.app/employer/signup"
             :class="{'primary-btn employer-btn': true, 'active-btn': $route.name.includes('employer')}"
           >
             Employer
