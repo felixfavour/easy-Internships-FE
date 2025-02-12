@@ -22,7 +22,7 @@ export default {
   methods: {
     async getUserActivity () {
       const activities = await this.$axios.get(`/user/activity/${this.$store.state.auth.user._id}`)
-      this.$store.commit('setActivities', activities.data.data)
+      this.$store.commit('setActivities', activities.data.data.reverse())
     }
   }
 }

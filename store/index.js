@@ -7,7 +7,8 @@ export const state = () => ({
   currentEmployer: null,
   sectors: ['Technology', 'Healthcare', 'Finance', 'Energy', 'Real Estate', 'Retail', 'Utilities', 'Agriculture', 'Other'],
   companySizes: ['0 - 10', '10 - 50', '50 - 100', '100 - 500', '500 - 1000', '1000+'],
-  locations: ['Abu Dhabi', 'Dubai', 'Sharjah', 'Ajman', 'Umm Al-Quwain', 'Fujairah', 'Ras Al Khaimah']
+  locations: ['Abu Dhabi', 'Dubai', 'Sharjah', 'Ajman', 'Umm Al-Quwain', 'Fujairah', 'Ras Al Khaimah'],
+  reviewTags: ['Culture', 'Work/Life Balance', 'Salary', 'Added Compensation', 'High-Impact Work', 'Job Security', 'Management']
 })
 
 export const mutations = ({

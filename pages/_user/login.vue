@@ -30,9 +30,9 @@
       </button>
       <div class="signup-text">
         <span>Don't have an account?</span>
-        <nuxt-link to="/school/signup">
-          Sign up
-        </nuxt-link>
+        <a target="_blank" href="https://ei-school.herokuapp.com/school/signup">
+          Sign up as a University
+        </a>
       </div>
     </form>
   </div>

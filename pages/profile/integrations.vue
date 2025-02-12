@@ -2,22 +2,22 @@
   <div class="page">
     <section>
       <!-- SCHOOL INTEGRATION -->
-      <div class="integration-card">
+      <div v-if="user" class="integration-card">
         <div class="info">
-          <h2>Middlesex Integration</h2>
+          <h2>{{ school.full_name }} Integration</h2>
           <div class="sub-text">
-            Connected to <u>Favour Felix Chinemerem - M00848614</u>
+            Connected to student with ID: {{ user._id }}
           </div>
         </div>
-        <div class="school logo" />
+        <div class="school logo" :style="`background-image: url(${school.icon})`" />
       </div>
 
       <!-- LINKEDIN INTEGRATION -->
-      <div class="integration-card">
+      <div v-if="user.linkedin" class="integration-card">
         <div class="info">
           <h2>LinkedIn Integration</h2>
           <div class="sub-text">
-            Connected to <u>Favour Felix</u>
+            Connected to <u><a target="_blank" :href="user.linkedin">{{ getLinkedinName(user.linkedin) }}</a></u>
           </div>
         </div>
         <div class="linkedin logo" />
@@ -32,8 +32,21 @@ export default {
   name: 'ProfileIntegrations',
   layout: 'dashLayout',
   computed: mapState({
-    user: state => state.auth.user
-  })
+    user: state => state.auth.user,
+    school: state => state.auth.studentSchool
+  }),
+  methods: {
+    getLinkedinName (link) {
+      const name = link?.replace('https://', '')
+        .replace('http://', '')
+        .replace('www.linkedin.com/in/', '')
+        .replace('linkedin.com/in/', '')
+        .replace('www.linkedin.com/company/', '')
+        .replace('linkedin.com/company/', '')
+
+      return `${name.split('-')[0]} ${name.split('-')[1] || ''}`.replace('/', '')
+    }
+  }
 }
 </script>
 
@@ -60,6 +73,9 @@ export default {
     opacity: 0.8;
     font-size: 0.85rem;
     margin-top: 4px;
+  }
+  .sub-text a {
+    text-transform: capitalize;
   }
   .logo {
     height: 40px;

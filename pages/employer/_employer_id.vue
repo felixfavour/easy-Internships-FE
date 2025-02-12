@@ -91,10 +91,14 @@ export default {
           break
       }
     })
-
-    // RECORD USER VISIT
-    const user = this.$store.state.auth.user
-    this.addVisit(user)
+    this.$nuxt.$on('refresh', () => {
+      this.getEmployer()
+      this.getReviews()
+      this.getRoles()
+      this.getSalaries()
+      this.getQuestions()
+      this.getAnswers()
+    })
   },
   methods: {
     async addVisit (user) {
@@ -111,18 +115,22 @@ export default {
       const employer = await this.$axios.get(`/employer/${this.$route.params.employer_id}`)
       this.employer = employer.data.data
       this.loading = ''
+
+      // RECORD USER VISIT
+      const user = this.$store.state.auth.user
+      this.addVisit(user)
     },
     async getReviews () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/review`)
-      this.reviews = reviews.data.data
+      this.reviews = reviews.data.data.reverse()
     },
     async getSalaries () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/salary`)
-      this.salaries = reviews.data.data
+      this.salaries = reviews.data.data.reverse()
     },
     async getRoles () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/role`)
-      this.roles = reviews.data.data
+      this.roles = reviews.data.data.reverse()
     },
     async getQuestions () {
       const reviews = await this.$axios.get(`/employer/${this.$route.params.employer_id}/question`)

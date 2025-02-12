@@ -1,17 +1,17 @@
 <template>
-  <div class="review-card">
+  <div class="review-card come-down-sm">
     <div class="row row-1">
       <div class="main">
         <div class="text-main">
           {{ review.title }}
         </div>
         <div class="text-sub">
-          {{ review.user_tagline }}
+          {{ review.reviewer_name }} - {{ review.user_tagline }}
         </div>
       </div>
       <div class="rating">
         <h2 class="count">
-          {{ review.rating }}
+          {{ review.rating }}/5
         </h2>
         <IconStarRating :rating="review.rating" :brackets="false" />
       </div>
